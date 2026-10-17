@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-17T15:27:07Z",
+  "generated_at": "2026-10-17T17:56:12Z",
   "project": {
     "configuration": {
       "busy_timeout_ms": 5000,
@@ -19,13 +19,13 @@
     "project_uuid": "f9a61a39-a454-4d25-91be-11fff04572c2",
     "schema_version": 2
   },
-  "project_revision": 1,
+  "project_revision": 4,
   "schema_version": 2,
   "semantic_context": {
     "declarations": [],
     "invalidations": [],
     "orientation": [],
-    "project_revision": 1,
+    "project_revision": 4,
     "project_uuid": "f9a61a39-a454-4d25-91be-11fff04572c2",
     "skill_uses": []
   },
@@ -47,18 +47,115 @@
         "revision": 1,
         "seq": 1,
         "timestamp": "2026-10-17T15:27:07Z"
+      },
+      {
+        "actor_session_id": null,
+        "entity_id": "f9a61a39-a454-4d25-91be-11fff04572c2",
+        "entity_type": "project",
+        "event_type": "plan.applied",
+        "payload_json": "{\"plan_digest\": \"6b2b74303be5fa4f886f4b4960a33c0a3b3a7c435eeba9e9de1abf607fe1a5d0\", \"source\": \"project-control\"}",
+        "revision": 2,
+        "seq": 2,
+        "timestamp": "2026-10-17T17:29:00Z"
+      },
+      {
+        "actor_session_id": null,
+        "entity_id": "KDA-EXPERIMENT-INTEGRATE",
+        "entity_type": "workflow_dispatch",
+        "event_type": "workflow.next_task",
+        "payload_json": "{\"lane_id\": \"KDA-EXPERIMENT-INTEGRATE\", \"run_id\": \"KDA-EXPERIMENT-ENGINE-RUN-1\", \"status\": \"claimed\", \"task_id\": \"KDA-EXPERIMENT-ENGINE\"}",
+        "revision": 3,
+        "seq": 3,
+        "timestamp": "2026-10-17T17:29:00Z"
+      },
+      {
+        "actor_session_id": null,
+        "entity_id": "KDA-EXPERIMENT-ENGINE",
+        "entity_type": "task",
+        "event_type": "task.completed",
+        "payload_json": "{\"completion_revision\": 4, \"disposition\": \"validated\", \"reached_checkpoints\": []}",
+        "revision": 4,
+        "seq": 4,
+        "timestamp": "2026-10-17T17:56:12Z"
       }
     ],
     "evidence": [],
     "gates": [],
-    "handoffs": [],
+    "handoffs": [
+      {
+        "claim_id": null,
+        "created_at": "2026-10-17T17:56:11Z",
+        "id": "a7d83728-40a8-4d46-ae92-9bacfd7709fb",
+        "kind": "complete",
+        "note": "Delivered optional portable kda_experiments engine on codex/experiment-engine (core 6147f05, workflow/docs eef015d; prior design/selection/controller commits). Full CPU suite: python3 -m unittest discover -s tests -v, 59 tests passed in 117.673s. Independent public CLI suite 15/15 in 86.184s. Focused core/engine 12/12, runner/controller 16/16, repeated cancellation 10/10; independent scoped source review verified protocol/identity/CAS/controller-postcheck and both crash-recovery fixes. Details in planning/experiment-engine.md and docs/experiment-engine.md. No GPU execution, actual admission, profiling or Volta qualification. User holds both skill submodules until readiness announcement; no submodule contents/gitlinks changed by this work. Preserved concurrent baae5f2 merge of independent ncu gitlink update 38ecc78 without qualifying it. Future dependency/SM70 phase remains deferred by user, outside completed CPU-engine task.",
+        "payload_json": "{\"authority_commit\": \"eef015d13969ce4e4423a3a97b137f4a748860a4\", \"changed_owned_paths\": [], \"checkpoints\": [], \"completion_commit\": \"eef015d13969ce4e4423a3a97b137f4a748860a4\", \"completion_gates\": [], \"completion_revision\": 4, \"finalized_checkpoints\": [], \"gates\": [], \"git_diffstat\": \".todo-orchestrator/state.snapshot.json | 220 +++++++++++++++++++++++++++++++--\\n todo-status.md                         |   6 +-\\n todos.md                               |   6 +-\\n 3 files changed, 218 insertions(+), 14 deletions(-)\", \"git_head\": \"eef015d13969ce4e4423a3a97b137f4a748860a4\", \"integration_commit\": null, \"interfaces\": [], \"note\": \"Delivered optional portable kda_experiments engine on codex/experiment-engine (core 6147f05, workflow/docs eef015d; prior design/selection/controller commits). Full CPU suite: python3 -m unittest discover -s tests -v, 59 tests passed in 117.673s. Independent public CLI suite 15/15 in 86.184s. Focused core/engine 12/12, runner/controller 16/16, repeated cancellation 10/10; independent scoped source review verified protocol/identity/CAS/controller-postcheck and both crash-recovery fixes. Details in planning/experiment-engine.md and docs/experiment-engine.md. No GPU execution, actual admission, profiling or Volta qualification. User holds both skill submodules until readiness announcement; no submodule contents/gitlinks changed by this work. Preserved concurrent baae5f2 merge of independent ncu gitlink update 38ecc78 without qualifying it. Future dependency/SM70 phase remains deferred by user, outside completed CPU-engine task.\", \"producer_commit\": \"eef015d13969ce4e4423a3a97b137f4a748860a4\", \"producer_root\": \"/home/tumlinson/kda\", \"resources\": [], \"task_id\": \"KDA-EXPERIMENT-ENGINE\"}",
+        "revision": 4,
+        "task_id": "KDA-EXPERIMENT-ENGINE"
+      }
+    ],
     "interface_consumers": [],
     "interfaces": [],
     "invariants": [],
     "live_recovery_audit": [],
     "migration_warnings": [],
     "named_locks": [],
-    "ownership_scopes": [],
+    "ownership_scopes": [
+      {
+        "mode": "exclusive",
+        "path": "README.md",
+        "task_id": "KDA-EXPERIMENT-ENGINE"
+      },
+      {
+        "mode": "exclusive",
+        "path": "docs",
+        "task_id": "KDA-EXPERIMENT-ENGINE"
+      },
+      {
+        "mode": "exclusive",
+        "path": "examples",
+        "task_id": "KDA-EXPERIMENT-ENGINE"
+      },
+      {
+        "mode": "exclusive",
+        "path": "kda_experiments",
+        "task_id": "KDA-EXPERIMENT-ENGINE"
+      },
+      {
+        "mode": "exclusive",
+        "path": "planning",
+        "task_id": "KDA-EXPERIMENT-ENGINE"
+      },
+      {
+        "mode": "exclusive",
+        "path": "prompts/basic-flow.md",
+        "task_id": "KDA-EXPERIMENT-ENGINE"
+      },
+      {
+        "mode": "exclusive",
+        "path": "tests",
+        "task_id": "KDA-EXPERIMENT-ENGINE"
+      },
+      {
+        "mode": "read",
+        "path": "AGENTS.md",
+        "task_id": "KDA-EXPERIMENT-ENGINE"
+      },
+      {
+        "mode": "read",
+        "path": "CLAUDE.md",
+        "task_id": "KDA-EXPERIMENT-ENGINE"
+      },
+      {
+        "mode": "read",
+        "path": "CONTRIBUTING.md",
+        "task_id": "KDA-EXPERIMENT-ENGINE"
+      },
+      {
+        "mode": "read",
+        "path": "LICENSE",
+        "task_id": "KDA-EXPERIMENT-ENGINE"
+      }
+    ],
     "project_amendments": [],
     "project_declarations": [],
     "project_fragment_invalidations": [],
@@ -70,11 +167,113 @@
     "task_dependencies": [],
     "task_invariants": [],
     "task_locks": [],
-    "tasks": [],
-    "workflow_context_fragments": [],
+    "tasks": [
+      {
+        "attention_reason": null,
+        "completion_commit": "eef015d13969ce4e4423a3a97b137f4a748860a4",
+        "completion_git_head": "eef015d13969ce4e4423a3a97b137f4a748860a4",
+        "completion_revision": 4,
+        "created_at": "2026-10-17T17:29:00Z",
+        "id": "KDA-EXPERIMENT-ENGINE",
+        "kind": "task",
+        "legacy_owner": null,
+        "legacy_payload_json": "{}",
+        "next_action": "Implement in coherent increments using Codex subagents, validate CPU-only contracts and CLI behavior, integrate and review.",
+        "notes": "",
+        "objective": "Deliver the approved portable experiment engine with strict correctness gates, reproducible benchmarking, persistent evidence and CPU-only validation. Defer all GPU execution and dependency qualification until the user announces readiness. Do not touch skill submodules or gitlinks.",
+        "parallel_policy": "serial",
+        "parent_id": null,
+        "priority": 100,
+        "result": "validated",
+        "result_policy_json": "{\"allowed_dispositions\": [\"validated\"]}",
+        "revision": 4,
+        "status": "done",
+        "tags_json": "[]",
+        "title": "Implement reproducible candidate experimentation",
+        "updated_at": "2026-10-17T17:56:12Z",
+        "version": 3
+      }
+    ],
+    "workflow_context_fragments": [
+      {
+        "content_hash": "3d92351d3ce3c9f72978086f8cb5dbc0799c68e714881165521b6b15fdb92022",
+        "content_json": "{\"authority\":\"server_enforced_role_and_task_scope\",\"interfaces\":[],\"ordered_tasks\":[\"KDA-EXPERIMENT-ENGINE\"],\"rendezvous\":[],\"role\":\"integrator\",\"workspace_mode\":\"exclusive\"}",
+        "created_at": "2026-10-17T17:29:00Z",
+        "creation_revision": 2,
+        "id": "KDA-EXPERIMENT-ENGINE-RUN-1:lane_brief:KDA-EXPERIMENT-INTEGRATE:-:1",
+        "invalidated_at": null,
+        "invalidation_revision": null,
+        "kind": "lane_brief",
+        "lane_id": "KDA-EXPERIMENT-INTEGRATE",
+        "owner_scope_json": "{\"lane_id\":\"KDA-EXPERIMENT-INTEGRATE\",\"run_id\":\"KDA-EXPERIMENT-ENGINE-RUN-1\"}",
+        "run_id": "KDA-EXPERIMENT-ENGINE-RUN-1",
+        "series_key": "",
+        "superseded_by": null,
+        "task_id": null,
+        "version": 1
+      },
+      {
+        "content_hash": "6cf7b5f4d1e53e62f0f7dd48e573a495e40ca856394034f91df7b0037fbdb405",
+        "content_json": "{\"boundaries\":[\"No GPU execution\",\"No skill submodule edits or gitlink changes\",\"Preserve upstream workflow and fork ancestry\"],\"motivation\":\"Make KDA's existing experiment workflow executable without importing a second optimizer\",\"objective\":\"Implement upstream-additive reproducible candidate experimentation\",\"references\":[\"planning/experiment-engine.md\"]}",
+        "created_at": "2026-10-17T17:29:00Z",
+        "creation_revision": 2,
+        "id": "KDA-EXPERIMENT-ENGINE-RUN-1:run_charter:-:-:1",
+        "invalidated_at": null,
+        "invalidation_revision": null,
+        "kind": "run_charter",
+        "lane_id": null,
+        "owner_scope_json": "{\"run_id\":\"KDA-EXPERIMENT-ENGINE-RUN-1\"}",
+        "run_id": "KDA-EXPERIMENT-ENGINE-RUN-1",
+        "series_key": "",
+        "superseded_by": null,
+        "task_id": null,
+        "version": 1
+      },
+      {
+        "content_hash": "49462d7baee5e8893acf30a10738ce8d741e8ec083e9e8143cd3b6708a546fe3",
+        "content_json": "{\"completion_contract\":null,\"forbidden_mutations\":[],\"gates\":[],\"next_action\":\"Implement in coherent increments using Codex subagents, validate CPU-only contracts and CLI behavior, integrate and review.\",\"objective\":\"Deliver the approved portable experiment engine with strict correctness gates, reproducible benchmarking, persistent evidence and CPU-only validation. Defer all GPU execution and dependency qualification until the user announces readiness. Do not touch skill submodules or gitlinks.\",\"scope\":{\"exclusive_paths\":[\"kda_experiments\",\"tests\",\"examples\",\"docs\",\"planning\",\"README.md\",\"prompts/basic-flow.md\"],\"read_paths\":[\"CLAUDE.md\",\"AGENTS.md\",\"LICENSE\",\"CONTRIBUTING.md\"]},\"tests\":[]}",
+        "created_at": "2026-10-17T17:29:00Z",
+        "creation_revision": 2,
+        "id": "KDA-EXPERIMENT-ENGINE-RUN-1:task_brief:KDA-EXPERIMENT-INTEGRATE:KDA-EXPERIMENT-ENGINE:1",
+        "invalidated_at": null,
+        "invalidation_revision": null,
+        "kind": "task_brief",
+        "lane_id": "KDA-EXPERIMENT-INTEGRATE",
+        "owner_scope_json": "{\"lane_id\":\"KDA-EXPERIMENT-INTEGRATE\",\"run_id\":\"KDA-EXPERIMENT-ENGINE-RUN-1\",\"task_id\":\"KDA-EXPERIMENT-ENGINE\"}",
+        "run_id": "KDA-EXPERIMENT-ENGINE-RUN-1",
+        "series_key": "",
+        "superseded_by": null,
+        "task_id": "KDA-EXPERIMENT-ENGINE",
+        "version": 1
+      }
+    ],
     "workflow_integration_queue": [],
-    "workflow_lane_tasks": [],
-    "workflow_lanes": [],
+    "workflow_lane_tasks": [
+      {
+        "activated_at": "2026-10-17T17:29:00Z",
+        "completed_at": "2026-10-17T17:56:12Z",
+        "enqueued_at": "2026-10-17T17:29:00Z",
+        "lane_id": "KDA-EXPERIMENT-INTEGRATE",
+        "position": 0,
+        "revision": 4,
+        "state": "completed",
+        "task_id": "KDA-EXPERIMENT-ENGINE"
+      }
+    ],
+    "workflow_lanes": [
+      {
+        "context_cursor": 0,
+        "created_at": "2026-10-17T17:29:00Z",
+        "id": "KDA-EXPERIMENT-INTEGRATE",
+        "parent_lane_id": null,
+        "revision": 4,
+        "role": "integrator",
+        "run_id": "KDA-EXPERIMENT-ENGINE-RUN-1",
+        "state": "closed",
+        "updated_at": "2026-10-17T17:56:12Z",
+        "workspace_mode": "exclusive"
+      }
+    ],
     "workflow_message_receipts": [],
     "workflow_message_recipients": [],
     "workflow_messages": [],
@@ -83,8 +282,30 @@
     "workflow_rendezvous": [],
     "workflow_rendezvous_arrivals": [],
     "workflow_rendezvous_participants": [],
-    "workflow_run_charters": [],
-    "workflow_runs": [],
+    "workflow_run_charters": [
+      {
+        "content_hash": "6cf7b5f4d1e53e62f0f7dd48e573a495e40ca856394034f91df7b0037fbdb405",
+        "content_json": "{\"boundaries\":[\"No GPU execution\",\"No skill submodule edits or gitlink changes\",\"Preserve upstream workflow and fork ancestry\"],\"motivation\":\"Make KDA's existing experiment workflow executable without importing a second optimizer\",\"objective\":\"Implement upstream-additive reproducible candidate experimentation\",\"references\":[\"planning/experiment-engine.md\"]}",
+        "created_at": "2026-10-17T17:29:00Z",
+        "creation_revision": 2,
+        "run_id": "KDA-EXPERIMENT-ENGINE-RUN-1",
+        "superseded_at": null,
+        "superseded_revision": null,
+        "version": 1
+      }
+    ],
+    "workflow_runs": [
+      {
+        "active_charter_version": 1,
+        "completed_at": null,
+        "created_at": "2026-10-17T17:29:00Z",
+        "id": "KDA-EXPERIMENT-ENGINE-RUN-1",
+        "revision": 4,
+        "root_task_id": "KDA-EXPERIMENT-ENGINE",
+        "status": "completed",
+        "updated_at": "2026-10-17T17:56:12Z"
+      }
+    ],
     "workflow_workspaces": []
   },
   "workflow_snapshot_version": 1
