@@ -1,0 +1,23 @@
+{
+  "schema_version": 3,
+  "project": {"name": "kda"},
+  "tasks": [{
+    "id": "KDA-EXPERIMENT-ENGINE",
+    "kind": "task",
+    "title": "Implement reproducible candidate experimentation",
+    "objective": "Deliver the approved portable experiment engine with strict correctness gates, reproducible benchmarking, persistent evidence and CPU-only validation. Defer all GPU execution and dependency qualification until the user announces readiness. Do not touch skill submodules or gitlinks.",
+    "priority": 100,
+    "parallel_policy": "serial",
+    "scope": {"exclusive_paths": ["kda_experiments", "tests", "examples", "docs", "planning", "README.md", "prompts/basic-flow.md"], "read_paths": ["CLAUDE.md", "AGENTS.md", "LICENSE", "CONTRIBUTING.md"]},
+    "depends_on": [],
+    "gates": [],
+    "result_policy": {"allowed_dispositions": ["validated"]},
+    "next_action": "Implement in coherent increments using Codex subagents, validate CPU-only contracts and CLI behavior, integrate and review."
+  }],
+  "runs": [{
+    "id": "KDA-EXPERIMENT-ENGINE-RUN-1",
+    "root_task_id": "KDA-EXPERIMENT-ENGINE",
+    "charter": {"objective": "Implement upstream-additive reproducible candidate experimentation", "motivation": "Make KDA's existing experiment workflow executable without importing a second optimizer", "boundaries": ["No GPU execution", "No skill submodule edits or gitlink changes", "Preserve upstream workflow and fork ancestry"], "references": ["planning/experiment-engine.md"]},
+    "lanes": [{"id": "KDA-EXPERIMENT-INTEGRATE", "role": "integrator", "workspace": {"mode": "exclusive"}, "tasks": ["KDA-EXPERIMENT-ENGINE"]}]
+  }]
+}
