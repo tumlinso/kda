@@ -10,6 +10,7 @@ This repository documents an early research prototype and remains under active d
 |---|---|
 | `docs/agent-flow.md` | Minimal end-to-end KDA workflow. |
 | `prompts/README.md` | How to use prompt templates. |
+| `planning/` | Repository plans and Project Control authority guidance. |
 | `prompts/basic-flow.md` | Generic starter prompt for a new task. |
 | `CLAUDE.md` | Repository-facing agent instructions. |
 | `CONTRIBUTING.md` | Contribution process and DCO sign-off requirements. |
@@ -49,8 +50,8 @@ The following third-party projects are included as Git submodules. The source UR
 
 | Path | Source | Pinned revision | License |
 |---|---|---|---|
-| `skills/KernelWiki` | [mit-han-lab/KernelWiki](https://github.com/mit-han-lab/KernelWiki.git) | Based on [`76d27b56f804e7e7295d4c570e1e5d7eef4b0a75`](https://github.com/mit-han-lab/KernelWiki/commit/76d27b56f804e7e7295d4c570e1e5d7eef4b0a75), with the repository-maintained release sanitization recorded by the gitlink | MIT for original material; embedded artifacts retain their upstream terms; restricted CuTe DSL artifacts are omitted |
-| `skills/ncu-report-skill` | [mit-han-lab/ncu-report-skill](https://github.com/mit-han-lab/ncu-report-skill.git) | [`d1887948c7d53690cfe6605f59c1329b8a1c6bb5`](https://github.com/mit-han-lab/ncu-report-skill/commit/d1887948c7d53690cfe6605f59c1329b8a1c6bb5) | MIT |
+| `skills/KernelWiki` | [tumlinso/KernelWiki](https://github.com/tumlinso/KernelWiki.git) | Based on [`76d27b56f804e7e7295d4c570e1e5d7eef4b0a75`](https://github.com/mit-han-lab/KernelWiki/commit/76d27b56f804e7e7295d4c570e1e5d7eef4b0a75), with the repository-maintained release sanitization recorded by the gitlink | MIT for original material; embedded artifacts retain their upstream terms; restricted CuTe DSL artifacts are omitted |
+| `skills/ncu-report-skill` | [tumlinso/ncu-report-skill](https://github.com/tumlinso/ncu-report-skill.git) | [`d1887948c7d53690cfe6605f59c1329b8a1c6bb5`](https://github.com/mit-han-lab/ncu-report-skill/commit/d1887948c7d53690cfe6605f59c1329b8a1c6bb5) | MIT |
 
 These submodules are not covered by this repository's first-party license. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for the applicable license text and additional details.
 
