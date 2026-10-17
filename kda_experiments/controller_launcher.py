@@ -13,9 +13,12 @@ import json
 import math
 import os
 from pathlib import Path
+import signal
 import subprocess
 import sys
 import tempfile
+import threading
+import time
 
 
 def _object(path: Path) -> dict:
@@ -54,6 +57,78 @@ def _write(path: Path, value: dict) -> None:
     finally:
         if os.path.exists(temporary):
             os.unlink(temporary)
+
+
+class _Cancelled(BaseException):
+    def __init__(self, signum: int):
+        self.signum = signum
+
+
+def _controller_process(argv: list[str], *, cwd: Path, stdout, stderr) -> int:
+    """Give the controller a chance to release admission on cancellation.
+
+    SIGTERM does not unwind Python finally blocks. Translate cancellation to
+    SIGINT for the controller, then enforce a short bounded cleanup deadline.
+    The outer engine also bounds this adapter and its process group.
+    """
+    process = None
+    previous = {}
+    pending_signal = None
+
+    def cancelled(signum, _frame):
+        nonlocal pending_signal
+        if process is None:
+            # Popen may be interrupted after spawning but before returning its
+            # handle. Defer cleanup until that handle has been assigned.
+            pending_signal = signum
+            return
+        raise _Cancelled(signum)
+
+    def signal_group(signum):
+        if process is None:
+            return
+        try:
+            os.killpg(process.pid, signum)
+        except ProcessLookupError:
+            pass
+
+    if os.name != "posix":
+        raise ValueError("controller launcher requires POSIX process groups")
+    if threading.current_thread() is threading.main_thread():
+        for signum in (signal.SIGTERM, signal.SIGINT):
+            previous[signum] = signal.signal(signum, cancelled)
+    try:
+        process = subprocess.Popen(argv, cwd=cwd, stdout=stdout, stderr=stderr,
+                                   stdin=subprocess.DEVNULL, start_new_session=True)
+        try:
+            if pending_signal is not None:
+                raise _Cancelled(pending_signal)
+            return process.wait()
+        except BaseException:
+            # Avoid a second interrupt cutting short the cleanup that releases
+            # the controller's reservation. The engine retains its hard limit.
+            for signum in previous:
+                signal.signal(signum, signal.SIG_IGN)
+            signal_group(signal.SIGINT)
+            deadline = time.monotonic() + 2
+            while time.monotonic() < deadline:
+                process.poll()
+                try:
+                    os.killpg(process.pid, 0)
+                except ProcessLookupError:
+                    break
+                # The controller leader may exit while its worker is still
+                # relaying cancellation to an independent evaluator group.
+                time.sleep(0.02)
+            signal_group(signal.SIGKILL)
+            process.wait()
+            raise
+        finally:
+            # A leader exiting does not establish that its descendants exited.
+            signal_group(signal.SIGKILL)
+    finally:
+        for signum, handler in previous.items():
+            signal.signal(signum, handler)
 
 
 def launch(config_path: Path, request_path: Path, result_path: Path) -> dict:
@@ -102,11 +177,9 @@ def launch(config_path: Path, request_path: Path, result_path: Path) -> dict:
     stdout_path = artifact_dir / "stdout.json"
     stderr_path = artifact_dir / "stderr.txt"
     with stdout_path.open("xb") as stdout, stderr_path.open("xb") as stderr:
-        # Inherit the engine launcher's process group so its deadline also kills
-        # controller descendants. Do not create a detached session or shell.
-        completed = subprocess.run(
+        returncode = _controller_process(
             command + ["run", "--spec", str(spec_path), "--json"],
-            cwd=project, stdout=stdout, stderr=stderr, check=False,
+            cwd=project, stdout=stdout, stderr=stderr,
         )
     try:
         if stdout_path.stat().st_size > 4 * 1024 * 1024:
@@ -114,12 +187,12 @@ def launch(config_path: Path, request_path: Path, result_path: Path) -> dict:
         controller = _object(stdout_path)
     except (ValueError, OSError) as exc:
         controller = {"ok": False, "error": str(exc)}
-    accepted = completed.returncode == 0 and controller.get("ok") is True
+    accepted = returncode == 0 and controller.get("ok") is True
     receipt = {
         "schema_version": 1,
         "request_id": request_id,
         "status": "ok" if accepted else "failed",
-        "exit_code": 0 if accepted else (completed.returncode or 1),
+        "exit_code": 0 if accepted else (returncode or 1),
         "controller_result": controller,
         "controller_spec": str(spec_path),
         "stdout_path": str(stdout_path),
@@ -138,6 +211,9 @@ def main(argv=None) -> int:
     try:
         receipt = launch(args.config.resolve(), args.request.resolve(), args.result.resolve())
         return 0 if receipt["status"] == "ok" else 1
+    except _Cancelled as exc:
+        print("controller launcher: cancelled", file=sys.stderr)
+        return 128 + exc.signum
     except (KeyError, OSError, ValueError) as exc:
         print(f"controller launcher: {exc}", file=sys.stderr)
         return 1

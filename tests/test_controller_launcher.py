@@ -1,9 +1,13 @@
 """Adapter tests use a fake controller and never inspect or execute CUDA."""
 
 import json
+import os
 from pathlib import Path
+import signal
+import subprocess
 import sys
 import tempfile
+import time
 import unittest
 
 from kda_experiments.controller_launcher import launch
@@ -82,6 +86,39 @@ class ControllerLauncherTests(unittest.TestCase):
         self.config.write_text(json.dumps(config))
         with self.assertRaisesRegex(ValueError, "toolchain"):
             launch(self.config, self.request, self.result)
+
+    @unittest.skipUnless(os.name == "posix", "POSIX controller cleanup")
+    def test_cancellation_unwinds_controller_cleanup(self):
+        self.controller.write_text(
+            "import pathlib,time\n"
+            "try:\n"
+            " pathlib.Path('ready').write_text('ready')\n"
+            " time.sleep(30)\n"
+            "finally:\n"
+            " pathlib.Path('released').write_text('released')\n"
+        )
+        with (self.root / "adapter.log").open("wb") as log:
+            process = subprocess.Popen(
+                [sys.executable, "-m", "kda_experiments.controller_launcher",
+                 "--config", str(self.config), "--request", str(self.request),
+                 "--result", str(self.result)],
+                stdout=log, stderr=log, start_new_session=True,
+            )
+            try:
+                deadline = time.monotonic() + 5
+                while not (self.root / "ready").exists() and time.monotonic() < deadline:
+                    if process.poll() is not None:
+                        self.fail("adapter exited before fake controller was ready")
+                    time.sleep(0.01)
+                self.assertTrue((self.root / "ready").exists())
+                os.killpg(process.pid, signal.SIGTERM)
+                self.assertEqual(process.wait(timeout=5), 128 + signal.SIGTERM)
+                self.assertTrue((self.root / "released").exists())
+                self.assertFalse(self.result.exists())
+            finally:
+                if process.poll() is None:
+                    os.killpg(process.pid, signal.SIGKILL)
+                    process.wait()
 
 
 if __name__ == "__main__":
