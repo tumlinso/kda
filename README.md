@@ -9,6 +9,7 @@ This repository documents an early research prototype and remains under active d
 | Path | Purpose |
 |---|---|
 | `docs/agent-flow.md` | Minimal end-to-end KDA workflow. |
+| `docs/experiment-engine.md` | Optional candidate evaluator, evidence, and upstream extension boundary. |
 | `prompts/README.md` | How to use prompt templates. |
 | `planning/` | Repository plans and Project Control authority guidance. |
 | `prompts/basic-flow.md` | Generic starter prompt for a new task. |
@@ -71,7 +72,7 @@ Install the `humanize` Claude Code plugin from the Claude Code plugin UI:
 5. Ask the agent to write a short plan draft to `docs/draft.md` in the implementation workspace.
 6. Convert the draft into an executable plan, either manually or with a planning tool such as Humanize.
 7. Implement in small iterations, verifying after each meaningful change.
-8. Record candidates, benchmark or evaluation results, profiling evidence, and final promotion decisions.
+8. Record candidates, benchmark or evaluation results, profiling evidence, and final promotion decisions. For repeatable candidate batches, use the optional [`kda_experiments` engine](docs/experiment-engine.md) from the existing agent workflow.
 
 The workflow is intentionally independent of any single benchmark harness or hardware target. A downstream task can add its own evaluator, datasets, profiling tools, and domain-specific references.
 

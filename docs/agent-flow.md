@@ -20,6 +20,16 @@ MLSys-style benchmark work is one possible application of this loop. The same fl
 8. Record evidence and decide whether to keep, revise, or reject the candidate.
 9. Repeat until the promotion criteria are met or the remaining blockers are explicit.
 
+The existing agent loop stays authoritative: agents research, implement,
+profile, diagnose, and choose the next experiment. When a task benefits from
+evaluating competing implementations consistently, the task can use the
+optional `kda_experiments` runner to register candidates, build them, validate
+every required case, then measure passing candidates in a serialized batch and
+retain evidence for selection. See
+[`experiment-engine.md`](experiment-engine.md) for its task contract and
+extension boundary. A task can continue using the simple one-candidate flow
+when a batch evaluator is not useful.
+
 ## Task Contract
 
 Each task should state:
@@ -44,6 +54,12 @@ Use simple files in the task workspace:
 - `runs/` or `outputs/` for generated artifacts.
 
 The exact format is less important than consistency. A future reader should be able to reconstruct what changed, what was measured, and why a candidate was promoted.
+
+When using `kda_experiments`, keep candidate sources separate from the task's
+independent reference and evaluation drivers. Declare numerical requirements
+in the task validator and preserve raw timing samples, workload identities,
+and environment evidence with each run. Synthetic CPU fixture timings test
+the evaluator only; use admitted hardware measurements for performance claims.
 
 ## Promotion Rule
 

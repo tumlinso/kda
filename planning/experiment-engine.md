@@ -93,3 +93,36 @@ Verified on 2026-10-17: NVIDIA `https://github.com/NVlabs/kda.git` main is
 commits and no missing upstream commits. Added an `upstream` remote and fetched
 main without merging it. Preserve normal ancestry and individually removable
 components. Prefer upstream equivalents when they satisfy these contracts.
+
+## Delivered and validated
+
+Implemented the optional `kda_experiments` CLI, strict task/result contracts,
+candidate snapshots, CPU-only build preparation, compiler target checks,
+serialized validation and repeated measurements, independent confirmation,
+comparison-group promotion, inspect/resume, and scoped evidence attachments.
+The execution adapter submits one batch to the independently installed CUDA
+controller and never falls back to direct execution after rejection. Runtime
+code and its tests remain separately replaceable from upstream's agent flow.
+
+Validation on 2026-10-17:
+
+- `python3 -m unittest discover -s tests -v`: 59 tests passed in 117.673 seconds.
+- Independent `python3 -m unittest tests.test_cli_integration -v`: 15 tests
+  passed in 86.184 seconds against frozen package sources.
+- Focused contract/engine and process/adapter suites passed; cancellation was
+  also repeated across nested and full fake-controller chains.
+- Source review identified and verified fixes for result-protocol gates,
+  identity drift, stale promotion, denied-controller finalization, and both
+  promotion crash-recovery windows. `git diff --check` passed.
+
+All fixtures are CPU-only. Their fixed synthetic timing values exercise
+selection machinery and make no performance claim. No CUDA runtime work,
+real controller admission, profiling, or Volta qualification was performed.
+Declared input manifests are the provenance boundary: include evaluation
+drivers, references, launcher/site configurations and their transitive inputs.
+
+A concurrent merge (`baae5f2`, incorporating `38ecc78`) updated the
+ncu-report-skill gitlink during implementation. That independently produced
+change was preserved. This work did not modify, fetch, switch, or qualify either
+skill submodule. The user readiness hold remains in effect for dependency
+integration and the SM70 demonstration.
