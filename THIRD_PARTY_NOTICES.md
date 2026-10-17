@@ -15,6 +15,7 @@ Verbatim copies of the upstream license files referenced below are provided in
 - Path: `skills/KernelWiki`
 - Source: <https://github.com/mit-han-lab/KernelWiki.git>
 - Upstream base revision: `76d27b56f804e7e7295d4c570e1e5d7eef4b0a75`
+- Pinned fork revision: `d5d2637aa9651e5fad835ea5192c20a2393da8ab`
 - Distributed revision: the gitlink recorded at `skills/KernelWiki`
 - License for original KernelWiki material: MIT
 - License text: [`third_party_licenses/MIT-hanlab.txt`](third_party_licenses/MIT-hanlab.txt)
@@ -28,7 +29,7 @@ below covers all 89 bundles in the distributed checkout.
 
 - Path: `skills/ncu-report-skill`
 - Source: <https://github.com/mit-han-lab/ncu-report-skill.git>
-- Pinned revision: `d1887948c7d53690cfe6605f59c1329b8a1c6bb5`
+- Pinned fork revision: `a051dc3b95b308c75c5d531b28986db080a2d4c0`
 - License: MIT
 - Copyright: Copyright (c) 2026 hanlab
 - License text: [`third_party_licenses/MIT-hanlab.txt`](third_party_licenses/MIT-hanlab.txt)
