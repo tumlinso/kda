@@ -34,6 +34,13 @@ below covers all 89 bundles in the distributed checkout.
 - Copyright: Copyright (c) 2026 hanlab
 - License text: [`third_party_licenses/MIT-hanlab.txt`](third_party_licenses/MIT-hanlab.txt)
 
+### KernelBender
+
+- Path: `skills/KernelBender`
+- Source: <https://github.com/tumlinso/KernelBender.git>
+- Pinned revision: `bcbba51e0ba3ebeac10f5bfda68832ccdcfc43cf`
+- License: no license file selected in this revision; KDA's first-party license does not apply to this independent repository.
+
 ## KernelWiki Artifact Components
 
 | Upstream component | Bundles | Distributed terms | License text |

@@ -1,0 +1,118 @@
+{
+  "schema_version": 3,
+  "project": {
+    "name": "KDA"
+  },
+  "tasks": [
+    {
+      "id": "KDA-KB-INTEGRATE",
+      "kind": "integration",
+      "title": "Integrate the accepted KernelBender component without changing the evaluator",
+      "objective": "Consume the versioned KernelBender handoff, pin the optional skill and add a small invocation route to the existing KDA workflow.",
+      "priority": 70,
+      "parallel_policy": "serial",
+      "scope": {
+        "exclusive_paths": [
+          ".gitmodules",
+          "README.md",
+          "docs/agent-flow.md",
+          "prompts/basic-flow.md",
+          "skills/KernelBender",
+          "tests/test_kernelbender_consumer.py",
+          "planning/kernelbender-integration.md",
+          "THIRD_PARTY_NOTICES.md",
+          "third_party_licenses"
+        ],
+        "read_paths": [
+          "docs/experiment-engine.md",
+          "kda_experiments",
+          "tests",
+          "skills/KernelBender/planning/kernelbender-bootstrap"
+        ],
+        "forbidden_paths": []
+      },
+      "depends_on": [],
+      "notes": "Apply only after the KernelBender component handoff supplies an accepted commit and evidence-qualified adoption status. Cross-repository readiness is checked at intake, not a fictional local task dependency. Read skills/KernelBender/planning/kernelbender-bootstrap/integration/KDA-INSERTION.md. Pin the independent repository at skills/KernelBender and use its nested skills/kernelbender directory explicitly; no recursive-discovery assumption. Add only the documented prompt/docs/README route and small consumer checks. Do not change kda_experiments, numerical contracts, trusted evaluators, unrelated pins or existing agent authority. Run current KDA regressions and show conventional and specialized task routes. If component evaluation did not support a broader default, keep it explicit/experimental or defer integration rather than claim proven benefit. Record actual commit, path and tests. Preserve applicable notices and verify the component owner's licensing decision before redistribution; do not invent a permissive license when none was selected.\nAccepted KernelBender commit bcbba51e0ba3ebeac10f5bfda68832ccdcfc43cf is published and its handoff accepted. Keep explicit experimental activation: no incremental skill benefit established. No license selected; linking the owner's existing repository does not add copied third-party source or license grants.\nRequired regression timeout600seconds allows the existing64-test suite, including process-cancellation and subprocess integration tests; no GPU workload is part of this consumer change.",
+      "next_action": "Verify the versioned component handoff, inspect current KDA scope and apply the minimal optional integration.",
+      "produced_artifacts": [
+        {
+          "kind": "integration receipt",
+          "path": "planning/kernelbender-integration.md"
+        }
+      ],
+      "result_policy": {
+        "allowed_dispositions": [
+          "validated",
+          "no_change_required"
+        ]
+      },
+      "gates": [
+        {
+          "id": "KDA-KB-REGRESSIONS",
+          "type": "command",
+          "required": true,
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests",
+            "-v"
+          ],
+          "cwd": ".",
+          "timeout": 600,
+          "input_paths": [
+            "tests",
+            "kda_experiments",
+            "skills/KernelBender",
+            "docs/agent-flow.md",
+            "prompts/basic-flow.md",
+            "README.md",
+            "skills/KernelBender/planning/kernelbender-bootstrap"
+          ],
+          "track_git_head": false
+        },
+        {
+          "id": "KDA-KB-REVIEW",
+          "type": "manual",
+          "required": true,
+          "description": "Confirm accepted component pin, exact nested skill entry, evidence-qualified status and no evaluator/authority changes.",
+          "input_paths": [
+            "skills/KernelBender",
+            "README.md",
+            "docs/agent-flow.md",
+            "prompts/basic-flow.md",
+            "planning/kernelbender-integration.md",
+            "THIRD_PARTY_NOTICES.md"
+          ],
+          "track_git_head": false,
+          "accepted": true,
+          "note": "Root reviewed published accepted bcbba51 gitlink, exact nested skill entry, optional experimental prompt/docs and actual consumer path check. All64existing+consumer regression tests passed242.624seconds. Conventional/library path preserved; engine, evaluator, authority and other pins unchanged. No license invented; independent component attribution recorded. Host-global discovery/model activation not claimed."
+        }
+      ]
+    }
+  ],
+  "runs": [
+    {
+      "id": "KDA-KB-INTEGRATION-RUN-1",
+      "root_task_id": "KDA-KB-INTEGRATE",
+      "charter": {
+        "objective": "Consume the versioned KernelBender handoff, pin the optional skill and add a small invocation route to the existing KDA workflow.",
+        "boundary": "Consume accepted component; do not redesign or duplicate its evaluator."
+      },
+      "lanes": [
+        {
+          "id": "KDA-KB-INTEGRATOR",
+          "role": "integrator",
+          "workspace": {
+            "mode": "exclusive"
+          },
+          "tasks": [
+            "KDA-KB-INTEGRATE"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -30,6 +30,19 @@ retain evidence for selection. See
 extension boundary. A task can continue using the simple one-candidate flow
 when a batch evaluator is not useful.
 
+## Optional Structural Design Review
+
+When a task leaves meaningful freedom in representation, composition, or reuse,
+or the caller requests a structural rethink, an agent may consult the
+experimental KernelBender skill before settling the design in `docs/draft.md`.
+The pinned entry point is
+`skills/KernelBender/skills/kernelbender/SKILL.md`; use the host agent
+mechanism to register or invoke this path explicitly. A conventional or library
+solution remains valid. Keep KDA’s task contract, independent correctness
+validation, and evaluation loop authoritative. Re-enter this review if new
+evidence exposes a structural limit or the caller changes reuse, output, or
+target constraints; routine tuning can continue without repeating it.
+
 ## Task Contract
 
 Each task should state:
