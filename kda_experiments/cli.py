@@ -12,6 +12,7 @@ from . import __version__
 from . import engine
 from .contracts import load_json, load_task
 from .errors import KDAExperimentError
+from .runner import install_termination_handlers
 from .store import register_candidate
 
 
@@ -206,6 +207,9 @@ def _dispatch(args: argparse.Namespace) -> tuple[dict[str, Any], int]:
 
 
 def main(argv: Sequence[str] | None = None) -> int:
+    # Install cancellation handling before either the public controller path
+    # or the admitted internal worker can start any evaluator subprocesses.
+    install_termination_handlers()
     arguments = list(sys.argv[1:] if argv is None else argv)
     if arguments and arguments[0] == "_worker":
         try:
