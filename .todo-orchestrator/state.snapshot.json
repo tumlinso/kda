@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-18T02:19:53Z",
+  "generated_at": "2026-10-18T09:05:29Z",
   "project": {
     "configuration": {
       "busy_timeout_ms": 5000,
@@ -19,13 +19,13 @@
     "project_uuid": "f9a61a39-a454-4d25-91be-11fff04572c2",
     "schema_version": 2
   },
-  "project_revision": 10,
+  "project_revision": 12,
   "schema_version": 2,
   "semantic_context": {
     "declarations": [],
     "invalidations": [],
     "orientation": [],
-    "project_revision": 10,
+    "project_revision": 12,
     "project_uuid": "f9a61a39-a454-4d25-91be-11fff04572c2",
     "skill_uses": []
   },
@@ -137,6 +137,26 @@
         "revision": 10,
         "seq": 10,
         "timestamp": "2026-10-18T02:19:53Z"
+      },
+      {
+        "actor_session_id": null,
+        "entity_id": "f9a61a39-a454-4d25-91be-11fff04572c2",
+        "entity_type": "project",
+        "event_type": "plan.applied",
+        "payload_json": "{\"plan_digest\": \"d7f06b81a93d188cc46cb8f7a5343de82f9ba05678fa355c33e06278e9f6d4ce\", \"source\": \"project-control\"}",
+        "revision": 11,
+        "seq": 11,
+        "timestamp": "2026-10-18T09:04:49Z"
+      },
+      {
+        "actor_session_id": null,
+        "entity_id": "KDA-ATTENTION-INTEGRATE",
+        "entity_type": "workflow_dispatch",
+        "event_type": "workflow.next_task",
+        "payload_json": "{\"lane_id\": \"KDA-ATTENTION-INTEGRATE\", \"run_id\": \"KDA-ATTENTION-RUN-1\", \"status\": \"claimed\", \"task_id\": \"KDA-ATTENTION-STUDY\"}",
+        "revision": 12,
+        "seq": 12,
+        "timestamp": "2026-10-18T09:05:29Z"
       }
     ],
     "evidence": [],
@@ -180,6 +200,46 @@
     "migration_warnings": [],
     "named_locks": [],
     "ownership_scopes": [
+      {
+        "mode": "exclusive",
+        "path": "README.md",
+        "task_id": "KDA-ATTENTION-STUDY"
+      },
+      {
+        "mode": "exclusive",
+        "path": "docs/experiment-engine.md",
+        "task_id": "KDA-ATTENTION-STUDY"
+      },
+      {
+        "mode": "exclusive",
+        "path": "kda_experiments",
+        "task_id": "KDA-ATTENTION-STUDY"
+      },
+      {
+        "mode": "exclusive",
+        "path": "planning",
+        "task_id": "KDA-ATTENTION-STUDY"
+      },
+      {
+        "mode": "exclusive",
+        "path": "runs/attention-decode-study",
+        "task_id": "KDA-ATTENTION-STUDY"
+      },
+      {
+        "mode": "exclusive",
+        "path": "tests",
+        "task_id": "KDA-ATTENTION-STUDY"
+      },
+      {
+        "mode": "read",
+        "path": "skills/KernelWiki",
+        "task_id": "KDA-ATTENTION-STUDY"
+      },
+      {
+        "mode": "read",
+        "path": "skills/ncu-report-skill",
+        "task_id": "KDA-ATTENTION-STUDY"
+      },
       {
         "mode": "exclusive",
         "path": "README.md",
@@ -315,6 +375,31 @@
     "tasks": [
       {
         "attention_reason": null,
+        "completion_commit": null,
+        "completion_git_head": null,
+        "completion_revision": null,
+        "created_at": "2026-10-18T09:04:49Z",
+        "id": "KDA-ATTENTION-STUDY",
+        "kind": "task",
+        "legacy_owner": null,
+        "legacy_payload_json": "{}",
+        "next_action": "Complete the main merge, claim the separate CUDA policy task, prepare task-owned contracts and baseline harness, then qualify controller concurrency before native attention work.",
+        "notes": "",
+        "objective": "After merging the qualified engine, coordinate per-device CUDA profiling maintenance and complete a bounded strict/mixed-precision attention optimization study with independent references, explicit dispatch, evidence-driven revision, conservative engine selection and archived evidence.",
+        "parallel_policy": "serial",
+        "parent_id": null,
+        "priority": 100,
+        "result": null,
+        "result_policy_json": "{\"allowed_dispositions\": [\"validated\"]}",
+        "revision": 12,
+        "status": "in_progress",
+        "tags_json": "[]",
+        "title": "Run a profiler-informed dense decode attention study",
+        "updated_at": "2026-10-18T09:05:29Z",
+        "version": 2
+      },
+      {
+        "attention_reason": null,
         "completion_commit": "eef015d13969ce4e4423a3a97b137f4a748860a4",
         "completion_git_head": "eef015d13969ce4e4423a3a97b137f4a748860a4",
         "completion_revision": 4,
@@ -390,6 +475,57 @@
       }
     ],
     "workflow_context_fragments": [
+      {
+        "content_hash": "00456bb83ca1a991ba2b3f4c2451d1b4396271dd686e4e68bd5faed2df05a1fe",
+        "content_json": "{\"authority\":\"server_enforced_role_and_task_scope\",\"interfaces\":[],\"ordered_tasks\":[\"KDA-ATTENTION-STUDY\"],\"rendezvous\":[],\"role\":\"integrator\",\"workspace_mode\":\"exclusive\"}",
+        "created_at": "2026-10-18T09:04:49Z",
+        "creation_revision": 11,
+        "id": "KDA-ATTENTION-RUN-1:lane_brief:KDA-ATTENTION-INTEGRATE:-:1",
+        "invalidated_at": null,
+        "invalidation_revision": null,
+        "kind": "lane_brief",
+        "lane_id": "KDA-ATTENTION-INTEGRATE",
+        "owner_scope_json": "{\"lane_id\":\"KDA-ATTENTION-INTEGRATE\",\"run_id\":\"KDA-ATTENTION-RUN-1\"}",
+        "run_id": "KDA-ATTENTION-RUN-1",
+        "series_key": "",
+        "superseded_by": null,
+        "task_id": null,
+        "version": 1
+      },
+      {
+        "content_hash": "293c4da18df8dc147c225301b3804442131ebbd7def6f61c69956b6fb0c69d08",
+        "content_json": "{\"boundaries\":[\"60 summed GPU-minutes including policy qualification and admission overhead\",\"All GPU execution through installed CUDA controller\",\"No KernelWiki/ncu-report-skill edits or gitlink updates\",\"Six equally weighted D64/70/128 x KV512/4096 cases, Q heads8 KVheads2 batch1 Sq1\",\"Strict and mixed numerical tracks have distinct comparison identities\",\"At most four new candidate versions; at most five attention profiles\",\"Task artifacts in durable ignored runs/attention-decode-study; final canonical timing isolated on one GPU\"],\"motivation\":\"User accepted the detailed plan including main merge, four-GPU opportunism and per-device NCU maintenance\",\"objective\":\"Demonstrate the agent-led research, profile, candidate and revision loop on dense V100 decode attention\",\"references\":[\"planning/attention-study.md\",\"planning/engineering-review-2026-10-18.md\"]}",
+        "created_at": "2026-10-18T09:04:49Z",
+        "creation_revision": 11,
+        "id": "KDA-ATTENTION-RUN-1:run_charter:-:-:1",
+        "invalidated_at": null,
+        "invalidation_revision": null,
+        "kind": "run_charter",
+        "lane_id": null,
+        "owner_scope_json": "{\"run_id\":\"KDA-ATTENTION-RUN-1\"}",
+        "run_id": "KDA-ATTENTION-RUN-1",
+        "series_key": "",
+        "superseded_by": null,
+        "task_id": null,
+        "version": 1
+      },
+      {
+        "content_hash": "4bd618b3812348cb7e7b82c1b49fc30cb4e5c8c184edd7061b2cac47e1f54ed5",
+        "content_json": "{\"completion_contract\":null,\"forbidden_mutations\":[],\"gates\":[],\"next_action\":\"Complete the main merge, claim the separate CUDA policy task, prepare task-owned contracts and baseline harness, then qualify controller concurrency before native attention work.\",\"objective\":\"After merging the qualified engine, coordinate per-device CUDA profiling maintenance and complete a bounded strict/mixed-precision attention optimization study with independent references, explicit dispatch, evidence-driven revision, conservative engine selection and archived evidence.\",\"scope\":{\"exclusive_paths\":[\"README.md\",\"planning\",\"docs/experiment-engine.md\",\"runs/attention-decode-study\",\"kda_experiments\",\"tests\"],\"read_paths\":[\"skills/KernelWiki\",\"skills/ncu-report-skill\"]},\"tests\":[]}",
+        "created_at": "2026-10-18T09:04:49Z",
+        "creation_revision": 11,
+        "id": "KDA-ATTENTION-RUN-1:task_brief:KDA-ATTENTION-INTEGRATE:KDA-ATTENTION-STUDY:1",
+        "invalidated_at": null,
+        "invalidation_revision": null,
+        "kind": "task_brief",
+        "lane_id": "KDA-ATTENTION-INTEGRATE",
+        "owner_scope_json": "{\"lane_id\":\"KDA-ATTENTION-INTEGRATE\",\"run_id\":\"KDA-ATTENTION-RUN-1\",\"task_id\":\"KDA-ATTENTION-STUDY\"}",
+        "run_id": "KDA-ATTENTION-RUN-1",
+        "series_key": "",
+        "superseded_by": null,
+        "task_id": "KDA-ATTENTION-STUDY",
+        "version": 1
+      },
       {
         "content_hash": "3d92351d3ce3c9f72978086f8cb5dbc0799c68e714881165521b6b15fdb92022",
         "content_json": "{\"authority\":\"server_enforced_role_and_task_scope\",\"interfaces\":[],\"ordered_tasks\":[\"KDA-EXPERIMENT-ENGINE\"],\"rendezvous\":[],\"role\":\"integrator\",\"workspace_mode\":\"exclusive\"}",
@@ -547,6 +683,16 @@
     "workflow_integration_queue": [],
     "workflow_lane_tasks": [
       {
+        "activated_at": "2026-10-18T09:05:29Z",
+        "completed_at": null,
+        "enqueued_at": "2026-10-18T09:04:49Z",
+        "lane_id": "KDA-ATTENTION-INTEGRATE",
+        "position": 0,
+        "revision": 12,
+        "state": "active",
+        "task_id": "KDA-ATTENTION-STUDY"
+      },
+      {
         "activated_at": "2026-10-17T17:29:00Z",
         "completed_at": "2026-10-17T17:56:12Z",
         "enqueued_at": "2026-10-17T17:29:00Z",
@@ -578,6 +724,18 @@
       }
     ],
     "workflow_lanes": [
+      {
+        "context_cursor": 0,
+        "created_at": "2026-10-18T09:04:49Z",
+        "id": "KDA-ATTENTION-INTEGRATE",
+        "parent_lane_id": null,
+        "revision": 12,
+        "role": "integrator",
+        "run_id": "KDA-ATTENTION-RUN-1",
+        "state": "active",
+        "updated_at": "2026-10-18T09:05:29Z",
+        "workspace_mode": "exclusive"
+      },
       {
         "context_cursor": 0,
         "created_at": "2026-10-17T17:29:00Z",
@@ -625,6 +783,16 @@
     "workflow_rendezvous_participants": [],
     "workflow_run_charters": [
       {
+        "content_hash": "293c4da18df8dc147c225301b3804442131ebbd7def6f61c69956b6fb0c69d08",
+        "content_json": "{\"boundaries\":[\"60 summed GPU-minutes including policy qualification and admission overhead\",\"All GPU execution through installed CUDA controller\",\"No KernelWiki/ncu-report-skill edits or gitlink updates\",\"Six equally weighted D64/70/128 x KV512/4096 cases, Q heads8 KVheads2 batch1 Sq1\",\"Strict and mixed numerical tracks have distinct comparison identities\",\"At most four new candidate versions; at most five attention profiles\",\"Task artifacts in durable ignored runs/attention-decode-study; final canonical timing isolated on one GPU\"],\"motivation\":\"User accepted the detailed plan including main merge, four-GPU opportunism and per-device NCU maintenance\",\"objective\":\"Demonstrate the agent-led research, profile, candidate and revision loop on dense V100 decode attention\",\"references\":[\"planning/attention-study.md\",\"planning/engineering-review-2026-10-18.md\"]}",
+        "created_at": "2026-10-18T09:04:49Z",
+        "creation_revision": 11,
+        "run_id": "KDA-ATTENTION-RUN-1",
+        "superseded_at": null,
+        "superseded_revision": null,
+        "version": 1
+      },
+      {
         "content_hash": "6cf7b5f4d1e53e62f0f7dd48e573a495e40ca856394034f91df7b0037fbdb405",
         "content_json": "{\"boundaries\":[\"No GPU execution\",\"No skill submodule edits or gitlink changes\",\"Preserve upstream workflow and fork ancestry\"],\"motivation\":\"Make KDA's existing experiment workflow executable without importing a second optimizer\",\"objective\":\"Implement upstream-additive reproducible candidate experimentation\",\"references\":[\"planning/experiment-engine.md\"]}",
         "created_at": "2026-10-17T17:29:00Z",
@@ -656,6 +824,16 @@
       }
     ],
     "workflow_runs": [
+      {
+        "active_charter_version": 1,
+        "completed_at": null,
+        "created_at": "2026-10-18T09:04:49Z",
+        "id": "KDA-ATTENTION-RUN-1",
+        "revision": 11,
+        "root_task_id": "KDA-ATTENTION-STUDY",
+        "status": "active",
+        "updated_at": "2026-10-18T09:04:49Z"
+      },
       {
         "active_charter_version": 1,
         "completed_at": null,

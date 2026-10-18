@@ -7,11 +7,8 @@ benchmark artifacts belong in separate implementation workspaces.
 Project Control workspace `kda` registers repository `kda` at
 `/home/tumlinson/kda`. Use Project Control for substantial repository work.
 
-Todo Orchestrator is the task authority. Its project identity is recorded in
-`.todo-orchestrator/project.json`, and its live SQLite database is stored under
-the Git common directory at `todo-orchestrator/<project_uuid>/state.sqlite3`.
-The snapshot and generated Markdown files are recovery and status projections.
-Plans in this directory do not directly change task state.
-
-The authority starts empty. Add executable work through supported Project
-Control planning tools when the next objective is defined.
+Todo Orchestrator is the task authority for this workspace. Use the supported
+Project Control operations to inspect and update task state; do not edit its
+database or generated snapshot and Markdown projections directly. Plans in
+this directory document objectives and implementation decisions, but do not
+by themselves change authoritative task state.

@@ -1,0 +1,73 @@
+{
+  "schema_version": 3,
+  "project": {
+    "name": "kda"
+  },
+  "tasks": [
+    {
+      "id": "KDA-ATTENTION-STUDY",
+      "kind": "task",
+      "title": "Run a profiler-informed dense decode attention study",
+      "objective": "After merging the qualified engine, coordinate per-device CUDA profiling maintenance and complete a bounded strict/mixed-precision attention optimization study with independent references, explicit dispatch, evidence-driven revision, conservative engine selection and archived evidence.",
+      "priority": 100,
+      "parallel_policy": "serial",
+      "scope": {
+        "exclusive_paths": [
+          "README.md",
+          "planning",
+          "docs/experiment-engine.md",
+          "runs/attention-decode-study",
+          "kda_experiments",
+          "tests"
+        ],
+        "read_paths": [
+          "skills/KernelWiki",
+          "skills/ncu-report-skill"
+        ]
+      },
+      "depends_on": [],
+      "gates": [],
+      "result_policy": {
+        "allowed_dispositions": [
+          "validated"
+        ]
+      },
+      "next_action": "Complete the main merge, claim the separate CUDA policy task, prepare task-owned contracts and baseline harness, then qualify controller concurrency before native attention work."
+    }
+  ],
+  "runs": [
+    {
+      "id": "KDA-ATTENTION-RUN-1",
+      "root_task_id": "KDA-ATTENTION-STUDY",
+      "charter": {
+        "objective": "Demonstrate the agent-led research, profile, candidate and revision loop on dense V100 decode attention",
+        "motivation": "User accepted the detailed plan including main merge, four-GPU opportunism and per-device NCU maintenance",
+        "boundaries": [
+          "60 summed GPU-minutes including policy qualification and admission overhead",
+          "All GPU execution through installed CUDA controller",
+          "No KernelWiki/ncu-report-skill edits or gitlink updates",
+          "Six equally weighted D64/70/128 x KV512/4096 cases, Q heads8 KVheads2 batch1 Sq1",
+          "Strict and mixed numerical tracks have distinct comparison identities",
+          "At most four new candidate versions; at most five attention profiles",
+          "Task artifacts in durable ignored runs/attention-decode-study; final canonical timing isolated on one GPU"
+        ],
+        "references": [
+          "planning/attention-study.md",
+          "planning/engineering-review-2026-10-18.md"
+        ]
+      },
+      "lanes": [
+        {
+          "id": "KDA-ATTENTION-INTEGRATE",
+          "role": "integrator",
+          "workspace": {
+            "mode": "exclusive"
+          },
+          "tasks": [
+            "KDA-ATTENTION-STUDY"
+          ]
+        }
+      ]
+    }
+  ]
+}

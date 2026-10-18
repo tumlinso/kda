@@ -28,8 +28,10 @@ Have a kernel that needs optimization? [Submit a request](https://github.com/NVl
 Install the agent workflow dependencies before starting the agent session:
 
 ```bash
-git clone --recurse-submodules https://github.com/mit-han-lab/kernel-design-agents.git
-cd kernel-design-agents
+git clone https://github.com/tumlinso/kda.git
+cd kda
+git submodule update --init --recursive
+git submodule status
 
 # link skills
 mkdir -p ~/.claude/skills
@@ -41,9 +43,19 @@ mkdir -p ~/.claude/skills && cd ~/.claude/skills
 git clone https://github.com/mit-han-lab/ncu-report-skill.git
 ```
 
-Use KernelWiki from this repository's pinned submodule. A direct upstream
-checkout may contain artifact snapshots governed by additional terms that are
-omitted from this distribution.
+This fork's `.gitmodules` entries use SSH URLs for the independently maintained
+skill forks. Initializing the submodules therefore requires a GitHub SSH key
+with access to those repositories, even though the KDA root was cloned over
+HTTPS. The update command checks out the revisions recorded by this KDA commit;
+`git submodule status` shows those revisions.
+
+For NVIDIA's upstream KDA project, use its
+[official repository](https://github.com/NVlabs/kda). That checkout follows
+upstream's own submodule configuration and does not include this fork's
+additional integrations. When using this fork, prefer the pinned KernelWiki
+submodule. A direct upstream KernelWiki checkout may contain artifact
+snapshots governed by additional terms that are omitted from this
+distribution.
 
 ## Submodules
 
