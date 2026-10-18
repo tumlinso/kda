@@ -199,9 +199,23 @@ architecture-filtered queries and page references. ncu-report-skill supplies
 profiling interpretation through its documented reports. When using either,
 record the dependency revision and cite the page or report alongside the task
 evidence. KDA does not duplicate their architecture catalog or profiling
-pipeline. This documentation does not change or pin either submodule. The user
-will announce when the independent ports are ready for inspection and
-integration.
+pipeline. KDA pins the completed Volta ports through its existing submodules:
+KernelWiki `244283cb8b57d1695af61aaa5e0cf5a04edfe9c9` and ncu-report-skill
+`bbb60a67fcb44c65510386c7dd41bc327fb91d25`. See the top-level README for
+checkout synchronization. Continue consuming their documented interfaces rather
+than copying their architecture knowledge or profiler implementation.
+
+Focused dependency consumer checks require no GPU:
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 python3 skills/KernelWiki/scripts/query.py --architecture V100 --type hardware --compact --limit 5
+PYTHONDONTWRITEBYTECODE=1 python3 skills/KernelWiki/scripts/get_page.py hw-volta-mma --follow-sources
+PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s skills/KernelWiki/tests -p 'test_volta_architecture.py' -v
+PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s skills/ncu-report-skill/tests -v
+```
+
+These exercise knowledge retrieval and offline profiling compatibility, rather
+than collecting a new GPU profile or qualifying an engine optimization run.
 
 The extension should remain a small set of replaceable modules and narrow
 workflow edits. When upstream KDA adds equivalent behavior, compare it against
@@ -213,8 +227,7 @@ work, fetch the NVIDIA KDA repository and merge its `main` into this fork's
 feature branch as a separate integration change; resolve conflicts while
 preserving the custom engine boundary, then run the focused regressions and
 CPU example. Do not rebuild or replace upstream history. Check gitlinks
-separately and update them only to inspected, compatible revisions after the
-user announces the two ports are ready.
+separately and update them only to inspected, compatible revisions.
 
 ## Validation status
 
@@ -234,6 +247,7 @@ The CPU-only example uses task-owned arithmetic and an independent
 `math.fsum` reference. Its timing samples are deterministic synthetic values
 labelled for testing: they demonstrate registration, correctness gating,
 selection, evidence retention, and resume behavior, but are not performance
-evidence. An SM70 run, controller-backed benchmark, and dependency integration
-remain pending until the user announces the KernelWiki and ncu-report-skill
-ports are ready.
+evidence. The completed dependency ports are pinned and available to KDA.
+A controller-backed SM70 demonstration of this experiment engine remains a
+separate hardware qualification step; dependency readiness and CPU consumer
+checks do not establish that GPU result.

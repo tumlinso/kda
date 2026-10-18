@@ -51,8 +51,18 @@ The following third-party projects are included as Git submodules. The source UR
 
 | Path | Source | Pinned revision | License |
 |---|---|---|---|
-| `skills/KernelWiki` | [tumlinso/KernelWiki](https://github.com/tumlinso/KernelWiki.git) | [`d5d2637aa9651e5fad835ea5192c20a2393da8ab`](https://github.com/tumlinso/KernelWiki/commit/d5d2637aa9651e5fad835ea5192c20a2393da8ab) | MIT for original material; embedded artifacts retain their upstream terms; restricted CuTe DSL artifacts are omitted |
-| `skills/ncu-report-skill` | [tumlinso/ncu-report-skill](https://github.com/tumlinso/ncu-report-skill.git) | [`a051dc3b95b308c75c5d531b28986db080a2d4c0`](https://github.com/tumlinso/ncu-report-skill/commit/a051dc3b95b308c75c5d531b28986db080a2d4c0) | MIT |
+| `skills/KernelWiki` | [tumlinso/KernelWiki](https://github.com/tumlinso/KernelWiki.git) | [`244283cb8b57d1695af61aaa5e0cf5a04edfe9c9`](https://github.com/tumlinso/KernelWiki/commit/244283cb8b57d1695af61aaa5e0cf5a04edfe9c9) | MIT for original material; embedded artifacts retain their upstream terms; restricted CuTe DSL artifacts are omitted |
+| `skills/ncu-report-skill` | [tumlinso/ncu-report-skill](https://github.com/tumlinso/ncu-report-skill.git) | [`bbb60a67fcb44c65510386c7dd41bc327fb91d25`](https://github.com/tumlinso/ncu-report-skill/commit/bbb60a67fcb44c65510386c7dd41bc327fb91d25) | MIT |
+
+These revisions include the completed Volta knowledge and profiling ports.
+After pulling KDA updates, synchronize the skill checkouts to the recorded pins:
+
+```bash
+git pull --ff-only
+git submodule update --init --recursive
+```
+
+Use the committed gitlinks rather than automatically tracking skill branches.
 
 These submodules are not covered by this repository's first-party license. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for the applicable license text and additional details.
 

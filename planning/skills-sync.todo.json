@@ -1,0 +1,21 @@
+{
+  "schema_version": 3,
+  "project": {"name": "kda"},
+  "tasks": [{
+    "id": "KDA-SKILLS-SYNC",
+    "kind": "task",
+    "title": "Verify completed Volta skill pins and synchronize consumer documentation",
+    "objective": "Fetch the published fork heads, retain exact compatible skill gitlinks, verify CPU-only consumer interfaces and correct stale dependency documentation. Do not edit dependency source or run GPU work.",
+    "priority": 100,
+    "parallel_policy": "serial",
+    "scope": {"exclusive_paths": ["README.md", "THIRD_PARTY_NOTICES.md", "docs/experiment-engine.md", "planning/skills-sync.todo.json"], "read_paths": ["skills/KernelWiki", "skills/ncu-report-skill"]},
+    "depends_on": [], "gates": [],
+    "result_policy": {"allowed_dispositions": ["validated"]},
+    "next_action": "Verify published revisions and pinned checkout state, smoke-test documented Volta consumers, synchronize revision documentation, commit and push."
+  }],
+  "runs": [{
+    "id": "KDA-SKILLS-SYNC-RUN-1", "root_task_id": "KDA-SKILLS-SYNC",
+    "charter": {"objective": "Consume the completed skill ports through exact pinned revisions", "motivation": "User announced both ports are done", "boundaries": ["No dependency source edits", "No GPU execution"], "references": ["docs/experiment-engine.md"]},
+    "lanes": [{"id": "KDA-SKILLS-SYNC-INTEGRATE", "role": "integrator", "workspace": {"mode": "exclusive"}, "tasks": ["KDA-SKILLS-SYNC"]}]
+  }]
+}
