@@ -4,3 +4,6 @@
 [submodule "skills/ncu-report-skill"]
 	path = skills/ncu-report-skill
 	url = git@github.com:tumlinso/ncu-report-skill.git
+[submodule "skills/KernelBender"]
+	path = skills/KernelBender
+	url = git@github.com:tumlinso/KernelBender.git
