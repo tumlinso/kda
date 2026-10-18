@@ -59,6 +59,28 @@ class ControllerLauncherTests(unittest.TestCase):
         self.assertEqual(launch(self.config, self.request, self.result)["status"], "failed")
         self.assertFalse((self.root / "worker-result.json").exists())
 
+    def test_site_quiescence_policy_reaches_controller(self):
+        config = json.loads(self.config.read_text())
+        config["quiescence"] = {"timeout_seconds": 60, "consecutive_idle_samples": 3,
+                                "interval_seconds": 0.5}
+        self.config.write_text(json.dumps(config))
+        self.assertEqual(launch(self.config, self.request, self.result)["status"], "ok")
+        seen = json.loads((self.root / "seen.json").read_text())
+        self.assertEqual(seen["spec"]["quiescence"], config["quiescence"])
+
+    def test_invalid_quiescence_policy_fails_before_admission(self):
+        config = json.loads(self.config.read_text())
+        policies = [None, {}, {"unknown": 1}, {"timeout_seconds": float("nan")},
+                    {"timeout_seconds": 61}, {"interval_seconds": 0},
+                    {"consecutive_idle_samples": True}, {"consecutive_idle_samples": 1.5}]
+        for policy in policies:
+            with self.subTest(policy=policy):
+                config["quiescence"] = policy
+                self.config.write_text(json.dumps(config))
+                with self.assertRaisesRegex(ValueError, "quiescence"):
+                    launch(self.config, self.request, self.result)
+                self.assertFalse((self.root / "seen.json").exists())
+
     def test_nonzero_exit_rejects_apparent_success_json(self):
         self.controller.write_text("import sys\nprint('{\"ok\":true}')\nsys.exit(2)\n")
         self.assertEqual(launch(self.config, self.request, self.result)["exit_code"], 2)

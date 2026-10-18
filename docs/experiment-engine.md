@@ -146,7 +146,12 @@ inside one admitted batch. The supplied adapter can be selected with
 ```
 
 The adapter's separate site config supplies `controller_argv`,
-`project_root`, `resources`, and `toolchain`. Use the installation-specific
+`project_root`, `resources`, and `toolchain`. An optional `quiescence` object
+passes the site's `timeout_seconds` (up to 60), `consecutive_idle_samples`
+(1–64), and `interval_seconds` (up to 5) to the controller. Omit it to retain
+controller defaults; slower host probes can need a longer observation window.
+This changes the observation budget, never the idle acceptance requirement.
+Use the installation-specific
 paths and resource values in that config; KDA has no baked-in host paths,
 device numbers, or topology. Add `site_execution_policy` to the task's
 existing `trusted_inputs` alongside its reference and evaluator inputs. Also

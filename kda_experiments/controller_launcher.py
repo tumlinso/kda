@@ -168,6 +168,18 @@ def launch(config_path: Path, request_path: Path, result_path: Path) -> dict:
         "argv": worker,
         "timeout": timeout,
     }
+    if "quiescence" in config:
+        policy = config["quiescence"]
+        limits = {"timeout_seconds": 60, "interval_seconds": 5,
+                  "consecutive_idle_samples": 64}
+        if not isinstance(policy, dict) or not policy or set(policy) - set(limits):
+            raise ValueError("unsupported quiescence configuration")
+        for key, value in policy.items():
+            if (isinstance(value, bool) or not isinstance(value, (int, float))
+                    or not math.isfinite(value) or not 0 < value <= limits[key]
+                    or (key == "consecutive_idle_samples" and type(value) is not int)):
+                raise ValueError(f"invalid quiescence {key}")
+        spec["quiescence"] = dict(policy)
     # These artifacts live beside the unique engine launcher request, not in a
     # shared fixed filename. The controller captures worker stdout independently.
     artifact_dir = request_path.parent / (request_path.stem + "-controller")
