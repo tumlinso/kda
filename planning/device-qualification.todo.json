@@ -1,0 +1,20 @@
+{
+  "schema_version": 3,
+  "project": {"name": "kda"},
+  "tasks": [{
+    "id": "KDA-SM70-DEVICE-QUALIFICATION",
+    "kind": "task",
+    "title": "Qualify the experiment engine through real V100 controller execution",
+    "objective": "Complete a bounded native SM70 qualification of the shipped KDA engine: independent numerical correctness and negative control, real repeated CUDA-event timing, evidence-based selection, controller receipts and release, sanitizer checks, interrupted-run resume, and one profiling/diagnosis path through completed skills. Preserve task-owned kernels and raw evidence outside tracked KDA source.",
+    "priority": 100, "parallel_policy": "serial",
+    "scope": {"exclusive_paths": ["kda_experiments", "tests", "docs/experiment-engine.md", "planning/device-qualification.md", "planning/device-qualification.todo.json"], "read_paths": ["skills/KernelWiki", "skills/ncu-report-skill"]},
+    "depends_on": [], "gates": [],
+    "result_policy": {"allowed_dispositions": ["validated"]},
+    "next_action": "Prepare a separate native reduction workspace, freeze its contracts, run all device stages through the CUDA controller, fix concrete integration defects, review evidence, archive it and publish bounded qualification."
+  }],
+  "runs": [{
+    "id": "KDA-SM70-QUALIFICATION-RUN-1", "root_task_id": "KDA-SM70-DEVICE-QUALIFICATION",
+    "charter": {"objective": "Qualify the implemented portable optimization workflow on a real V100", "motivation": "User explicitly authorized full on-device qualification after both skills completed", "boundaries": ["All GPU work through cuda_controller.py", "No dependency source edits", "One representative kernel and one selected GPU; no optimization campaign", "At most 30 minutes total admitted foreground execution; individual stages bounded", "Task workspace /tmp/kda-sm70-qualification-20261018; archive evidence under ignored KDA runs/"], "references": ["planning/device-qualification.md", "docs/experiment-engine.md"]},
+    "lanes": [{"id": "KDA-SM70-QUALIFY-INTEGRATE", "role": "integrator", "workspace": {"mode": "exclusive"}, "tasks": ["KDA-SM70-DEVICE-QUALIFICATION"]}]
+  }]
+}

@@ -253,6 +253,12 @@ The CPU-only example uses task-owned arithmetic and an independent
 labelled for testing: they demonstrate registration, correctness gating,
 selection, evidence retention, and resume behavior, but are not performance
 evidence. The completed dependency ports are pinned and available to KDA.
-A controller-backed SM70 demonstration of this experiment engine remains a
-separate hardware qualification step; dependency readiness and CPU consumer
-checks do not establish that GPU result.
+A bounded controller-backed V100/SM70 qualification passed on 2026-10-18:
+independent FP32 references and negative control, native candidate compilation,
+repeated CUDA-event comparison, selection/retention, real SIGTERM cleanup and
+fresh resume, representative memory/race/synchronization checks, and one exact-
+binary NCU report analyzed by the pinned skill. See
+[device qualification](../planning/device-qualification.md) for scope, fixes,
+regression results and the local evidence archive. This qualifies that device,
+toolchain and workload contract; other kernels and environments still need
+their own correctness and measurement evidence.

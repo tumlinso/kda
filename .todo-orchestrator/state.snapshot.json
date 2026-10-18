@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-18T01:10:39Z",
+  "generated_at": "2026-10-18T02:19:53Z",
   "project": {
     "configuration": {
       "busy_timeout_ms": 5000,
@@ -19,13 +19,13 @@
     "project_uuid": "f9a61a39-a454-4d25-91be-11fff04572c2",
     "schema_version": 2
   },
-  "project_revision": 7,
+  "project_revision": 10,
   "schema_version": 2,
   "semantic_context": {
     "declarations": [],
     "invalidations": [],
     "orientation": [],
-    "project_revision": 7,
+    "project_revision": 10,
     "project_uuid": "f9a61a39-a454-4d25-91be-11fff04572c2",
     "skill_uses": []
   },
@@ -107,11 +107,51 @@
         "revision": 7,
         "seq": 7,
         "timestamp": "2026-10-18T01:10:39Z"
+      },
+      {
+        "actor_session_id": null,
+        "entity_id": "f9a61a39-a454-4d25-91be-11fff04572c2",
+        "entity_type": "project",
+        "event_type": "plan.applied",
+        "payload_json": "{\"plan_digest\": \"45539e1c4e3143d3ba4e596f5282b43023ac6d22ef1cce5ef17061a82b5514fe\", \"source\": \"project-control\"}",
+        "revision": 8,
+        "seq": 8,
+        "timestamp": "2026-10-18T01:17:18Z"
+      },
+      {
+        "actor_session_id": null,
+        "entity_id": "KDA-SM70-QUALIFY-INTEGRATE",
+        "entity_type": "workflow_dispatch",
+        "event_type": "workflow.next_task",
+        "payload_json": "{\"lane_id\": \"KDA-SM70-QUALIFY-INTEGRATE\", \"run_id\": \"KDA-SM70-QUALIFICATION-RUN-1\", \"status\": \"claimed\", \"task_id\": \"KDA-SM70-DEVICE-QUALIFICATION\"}",
+        "revision": 9,
+        "seq": 9,
+        "timestamp": "2026-10-18T01:17:19Z"
+      },
+      {
+        "actor_session_id": null,
+        "entity_id": "KDA-SM70-DEVICE-QUALIFICATION",
+        "entity_type": "task",
+        "event_type": "task.completed",
+        "payload_json": "{\"completion_revision\": 10, \"disposition\": \"validated\", \"reached_checkpoints\": []}",
+        "revision": 10,
+        "seq": 10,
+        "timestamp": "2026-10-18T02:19:53Z"
       }
     ],
     "evidence": [],
     "gates": [],
     "handoffs": [
+      {
+        "claim_id": null,
+        "created_at": "2026-10-18T02:19:53Z",
+        "id": "76ed9b79-4378-46f5-a599-c28066f1fd4a",
+        "kind": "complete",
+        "note": "Accepted bounded on-device experimental framework qualification. planning/device-qualification.md documents scope, fixes, exact outcome, limits, independent audit and locally archived reproducibility evidence. Final63CPUtests pass; realcorrectness/timing/selection/cancellation/resume/sanitizer/profile pathpassed; all9admissionsreleased within30minbudget. Skill submodulesclean andunchanged. Source/documentation commitandpushfollow.",
+        "payload_json": "{\"authority_commit\": \"4e674159aba569245b6c39c8b2a1906755cfe35d\", \"changed_owned_paths\": [\"docs/experiment-engine.md\", \"planning/device-qualification.md\", \"planning/device-qualification.todo.json\"], \"checkpoints\": [], \"completion_commit\": \"4e674159aba569245b6c39c8b2a1906755cfe35d\", \"completion_gates\": [], \"completion_revision\": 10, \"finalized_checkpoints\": [], \"gates\": [], \"git_diffstat\": \".todo-orchestrator/state.snapshot.json | 179 ++++++++++++++++++++++++++++++++-\\n docs/experiment-engine.md              |  12 ++-\\n todo-status.md                         |   3 +-\\n todos.md                               |   3 +-\\n 4 files changed, 189 insertions(+), 8 deletions(-)\", \"git_head\": \"4e674159aba569245b6c39c8b2a1906755cfe35d\", \"integration_commit\": null, \"interfaces\": [], \"note\": \"Accepted bounded on-device experimental framework qualification. planning/device-qualification.md documents scope, fixes, exact outcome, limits, independent audit and locally archived reproducibility evidence. Final63CPUtests pass; realcorrectness/timing/selection/cancellation/resume/sanitizer/profile pathpassed; all9admissionsreleased within30minbudget. Skill submodulesclean andunchanged. Source/documentation commitandpushfollow.\", \"producer_commit\": \"4e674159aba569245b6c39c8b2a1906755cfe35d\", \"producer_root\": \"/home/tumlinson/kda\", \"resources\": [], \"task_id\": \"KDA-SM70-DEVICE-QUALIFICATION\"}",
+        "revision": 10,
+        "task_id": "KDA-SM70-DEVICE-QUALIFICATION"
+      },
       {
         "claim_id": null,
         "created_at": "2026-10-17T17:56:11Z",
@@ -224,6 +264,41 @@
         "mode": "read",
         "path": "skills/ncu-report-skill",
         "task_id": "KDA-SKILLS-SYNC"
+      },
+      {
+        "mode": "exclusive",
+        "path": "docs/experiment-engine.md",
+        "task_id": "KDA-SM70-DEVICE-QUALIFICATION"
+      },
+      {
+        "mode": "exclusive",
+        "path": "kda_experiments",
+        "task_id": "KDA-SM70-DEVICE-QUALIFICATION"
+      },
+      {
+        "mode": "exclusive",
+        "path": "planning/device-qualification.md",
+        "task_id": "KDA-SM70-DEVICE-QUALIFICATION"
+      },
+      {
+        "mode": "exclusive",
+        "path": "planning/device-qualification.todo.json",
+        "task_id": "KDA-SM70-DEVICE-QUALIFICATION"
+      },
+      {
+        "mode": "exclusive",
+        "path": "tests",
+        "task_id": "KDA-SM70-DEVICE-QUALIFICATION"
+      },
+      {
+        "mode": "read",
+        "path": "skills/KernelWiki",
+        "task_id": "KDA-SM70-DEVICE-QUALIFICATION"
+      },
+      {
+        "mode": "read",
+        "path": "skills/ncu-report-skill",
+        "task_id": "KDA-SM70-DEVICE-QUALIFICATION"
       }
     ],
     "project_amendments": [],
@@ -286,6 +361,31 @@
         "tags_json": "[]",
         "title": "Verify completed Volta skill pins and synchronize consumer documentation",
         "updated_at": "2026-10-18T01:10:39Z",
+        "version": 3
+      },
+      {
+        "attention_reason": null,
+        "completion_commit": "4e674159aba569245b6c39c8b2a1906755cfe35d",
+        "completion_git_head": "4e674159aba569245b6c39c8b2a1906755cfe35d",
+        "completion_revision": 10,
+        "created_at": "2026-10-18T01:17:18Z",
+        "id": "KDA-SM70-DEVICE-QUALIFICATION",
+        "kind": "task",
+        "legacy_owner": null,
+        "legacy_payload_json": "{}",
+        "next_action": "Prepare a separate native reduction workspace, freeze its contracts, run all device stages through the CUDA controller, fix concrete integration defects, review evidence, archive it and publish bounded qualification.",
+        "notes": "",
+        "objective": "Complete a bounded native SM70 qualification of the shipped KDA engine: independent numerical correctness and negative control, real repeated CUDA-event timing, evidence-based selection, controller receipts and release, sanitizer checks, interrupted-run resume, and one profiling/diagnosis path through completed skills. Preserve task-owned kernels and raw evidence outside tracked KDA source.",
+        "parallel_policy": "serial",
+        "parent_id": null,
+        "priority": 100,
+        "result": "validated",
+        "result_policy_json": "{\"allowed_dispositions\": [\"validated\"]}",
+        "revision": 10,
+        "status": "done",
+        "tags_json": "[]",
+        "title": "Qualify the experiment engine through real V100 controller execution",
+        "updated_at": "2026-10-18T02:19:53Z",
         "version": 3
       }
     ],
@@ -391,6 +491,57 @@
         "superseded_by": null,
         "task_id": "KDA-SKILLS-SYNC",
         "version": 1
+      },
+      {
+        "content_hash": "7bd68cf27ad3ad094dd140b0400ba737be8eb337244d46f8c2264cc0c4a49dde",
+        "content_json": "{\"authority\":\"server_enforced_role_and_task_scope\",\"interfaces\":[],\"ordered_tasks\":[\"KDA-SM70-DEVICE-QUALIFICATION\"],\"rendezvous\":[],\"role\":\"integrator\",\"workspace_mode\":\"exclusive\"}",
+        "created_at": "2026-10-18T01:17:18Z",
+        "creation_revision": 8,
+        "id": "KDA-SM70-QUALIFICATION-RUN-1:lane_brief:KDA-SM70-QUALIFY-INTEGRATE:-:1",
+        "invalidated_at": null,
+        "invalidation_revision": null,
+        "kind": "lane_brief",
+        "lane_id": "KDA-SM70-QUALIFY-INTEGRATE",
+        "owner_scope_json": "{\"lane_id\":\"KDA-SM70-QUALIFY-INTEGRATE\",\"run_id\":\"KDA-SM70-QUALIFICATION-RUN-1\"}",
+        "run_id": "KDA-SM70-QUALIFICATION-RUN-1",
+        "series_key": "",
+        "superseded_by": null,
+        "task_id": null,
+        "version": 1
+      },
+      {
+        "content_hash": "276d9f909c6c86a6530b2af394760094af071fe59f352d0f5565292841414b93",
+        "content_json": "{\"boundaries\":[\"All GPU work through cuda_controller.py\",\"No dependency source edits\",\"One representative kernel and one selected GPU; no optimization campaign\",\"At most 30 minutes total admitted foreground execution; individual stages bounded\",\"Task workspace /tmp/kda-sm70-qualification-20261018; archive evidence under ignored KDA runs/\"],\"motivation\":\"User explicitly authorized full on-device qualification after both skills completed\",\"objective\":\"Qualify the implemented portable optimization workflow on a real V100\",\"references\":[\"planning/device-qualification.md\",\"docs/experiment-engine.md\"]}",
+        "created_at": "2026-10-18T01:17:18Z",
+        "creation_revision": 8,
+        "id": "KDA-SM70-QUALIFICATION-RUN-1:run_charter:-:-:1",
+        "invalidated_at": null,
+        "invalidation_revision": null,
+        "kind": "run_charter",
+        "lane_id": null,
+        "owner_scope_json": "{\"run_id\":\"KDA-SM70-QUALIFICATION-RUN-1\"}",
+        "run_id": "KDA-SM70-QUALIFICATION-RUN-1",
+        "series_key": "",
+        "superseded_by": null,
+        "task_id": null,
+        "version": 1
+      },
+      {
+        "content_hash": "0ec06d8080b84fb0849d7c8ad7e61ebe47e7c5911b05ccb3c8db2b48f64920ec",
+        "content_json": "{\"completion_contract\":null,\"forbidden_mutations\":[],\"gates\":[],\"next_action\":\"Prepare a separate native reduction workspace, freeze its contracts, run all device stages through the CUDA controller, fix concrete integration defects, review evidence, archive it and publish bounded qualification.\",\"objective\":\"Complete a bounded native SM70 qualification of the shipped KDA engine: independent numerical correctness and negative control, real repeated CUDA-event timing, evidence-based selection, controller receipts and release, sanitizer checks, interrupted-run resume, and one profiling/diagnosis path through completed skills. Preserve task-owned kernels and raw evidence outside tracked KDA source.\",\"scope\":{\"exclusive_paths\":[\"kda_experiments\",\"tests\",\"docs/experiment-engine.md\",\"planning/device-qualification.md\",\"planning/device-qualification.todo.json\"],\"read_paths\":[\"skills/KernelWiki\",\"skills/ncu-report-skill\"]},\"tests\":[]}",
+        "created_at": "2026-10-18T01:17:18Z",
+        "creation_revision": 8,
+        "id": "KDA-SM70-QUALIFICATION-RUN-1:task_brief:KDA-SM70-QUALIFY-INTEGRATE:KDA-SM70-DEVICE-QUALIFICATION:1",
+        "invalidated_at": null,
+        "invalidation_revision": null,
+        "kind": "task_brief",
+        "lane_id": "KDA-SM70-QUALIFY-INTEGRATE",
+        "owner_scope_json": "{\"lane_id\":\"KDA-SM70-QUALIFY-INTEGRATE\",\"run_id\":\"KDA-SM70-QUALIFICATION-RUN-1\",\"task_id\":\"KDA-SM70-DEVICE-QUALIFICATION\"}",
+        "run_id": "KDA-SM70-QUALIFICATION-RUN-1",
+        "series_key": "",
+        "superseded_by": null,
+        "task_id": "KDA-SM70-DEVICE-QUALIFICATION",
+        "version": 1
       }
     ],
     "workflow_integration_queue": [],
@@ -414,6 +565,16 @@
         "revision": 7,
         "state": "completed",
         "task_id": "KDA-SKILLS-SYNC"
+      },
+      {
+        "activated_at": "2026-10-18T01:17:19Z",
+        "completed_at": "2026-10-18T02:19:53Z",
+        "enqueued_at": "2026-10-18T01:17:18Z",
+        "lane_id": "KDA-SM70-QUALIFY-INTEGRATE",
+        "position": 0,
+        "revision": 10,
+        "state": "completed",
+        "task_id": "KDA-SM70-DEVICE-QUALIFICATION"
       }
     ],
     "workflow_lanes": [
@@ -439,6 +600,18 @@
         "run_id": "KDA-SKILLS-SYNC-RUN-1",
         "state": "closed",
         "updated_at": "2026-10-18T01:10:39Z",
+        "workspace_mode": "exclusive"
+      },
+      {
+        "context_cursor": 0,
+        "created_at": "2026-10-18T01:17:18Z",
+        "id": "KDA-SM70-QUALIFY-INTEGRATE",
+        "parent_lane_id": null,
+        "revision": 10,
+        "role": "integrator",
+        "run_id": "KDA-SM70-QUALIFICATION-RUN-1",
+        "state": "closed",
+        "updated_at": "2026-10-18T02:19:53Z",
         "workspace_mode": "exclusive"
       }
     ],
@@ -470,6 +643,16 @@
         "superseded_at": null,
         "superseded_revision": null,
         "version": 1
+      },
+      {
+        "content_hash": "276d9f909c6c86a6530b2af394760094af071fe59f352d0f5565292841414b93",
+        "content_json": "{\"boundaries\":[\"All GPU work through cuda_controller.py\",\"No dependency source edits\",\"One representative kernel and one selected GPU; no optimization campaign\",\"At most 30 minutes total admitted foreground execution; individual stages bounded\",\"Task workspace /tmp/kda-sm70-qualification-20261018; archive evidence under ignored KDA runs/\"],\"motivation\":\"User explicitly authorized full on-device qualification after both skills completed\",\"objective\":\"Qualify the implemented portable optimization workflow on a real V100\",\"references\":[\"planning/device-qualification.md\",\"docs/experiment-engine.md\"]}",
+        "created_at": "2026-10-18T01:17:18Z",
+        "creation_revision": 8,
+        "run_id": "KDA-SM70-QUALIFICATION-RUN-1",
+        "superseded_at": null,
+        "superseded_revision": null,
+        "version": 1
       }
     ],
     "workflow_runs": [
@@ -492,6 +675,16 @@
         "root_task_id": "KDA-SKILLS-SYNC",
         "status": "completed",
         "updated_at": "2026-10-18T01:10:39Z"
+      },
+      {
+        "active_charter_version": 1,
+        "completed_at": null,
+        "created_at": "2026-10-18T01:17:18Z",
+        "id": "KDA-SM70-QUALIFICATION-RUN-1",
+        "revision": 10,
+        "root_task_id": "KDA-SM70-DEVICE-QUALIFICATION",
+        "status": "completed",
+        "updated_at": "2026-10-18T02:19:53Z"
       }
     ],
     "workflow_workspaces": []
