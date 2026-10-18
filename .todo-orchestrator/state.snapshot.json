@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-18T09:05:29Z",
+  "generated_at": "2026-10-18T10:38:18Z",
   "project": {
     "configuration": {
       "busy_timeout_ms": 5000,
@@ -19,13 +19,13 @@
     "project_uuid": "f9a61a39-a454-4d25-91be-11fff04572c2",
     "schema_version": 2
   },
-  "project_revision": 12,
+  "project_revision": 13,
   "schema_version": 2,
   "semantic_context": {
     "declarations": [],
     "invalidations": [],
     "orientation": [],
-    "project_revision": 12,
+    "project_revision": 13,
     "project_uuid": "f9a61a39-a454-4d25-91be-11fff04572c2",
     "skill_uses": []
   },
@@ -157,11 +157,31 @@
         "revision": 12,
         "seq": 12,
         "timestamp": "2026-10-18T09:05:29Z"
+      },
+      {
+        "actor_session_id": null,
+        "entity_id": "KDA-ATTENTION-STUDY",
+        "entity_type": "task",
+        "event_type": "task.completed",
+        "payload_json": "{\"completion_revision\": 13, \"disposition\": \"validated\", \"reached_checkpoints\": []}",
+        "revision": 13,
+        "seq": 13,
+        "timestamp": "2026-10-18T10:38:18Z"
       }
     ],
     "evidence": [],
     "gates": [],
     "handoffs": [
+      {
+        "claim_id": null,
+        "created_at": "2026-10-18T10:38:18Z",
+        "id": "4c55953c-2908-4cd6-890c-f673b9f4284b",
+        "kind": "complete",
+        "note": "Merged/pushed qualified engine to main669b3a1 first. Delivered and native-qualified per-device CUDA NCU policy (sourceb70d76b pushed). Completed four-version V100 attention study across four GPUs: strict gqa-parallel-merge confirmed1.42958054x vs strongest valid split16,95%round-bootstrapCI[1.42907591,1.43014997],all6cases improved. All24inputs pass; acceptedwinner/baseline/correctedmaterializedcontrol each pass mem/race/sync. Independent audits cover720rawtimingrecords. Preserved and disqualified racy mixed/originalmaterialized alternatives; one-barrier correctedbaseline control qualified. No submodule source/gitlink edits. Five attention profiles.2270.28767summed admittedGPUseconds including allfailed/policyattempts;allresourcesreleased/no compute processes. Eleven focused taskCPUchecks,17policyregressions,63originalenginepremergechecks. Portable5887-file archive streamverified SHA25662b11ea83172827bae4cee0b67b56a16c906e3265197d1716a740ea260201e61 at runs/attention-decode-study/delivery/. Final report planning/attention-study-results.md; task source signed-off history bundle4ba784f. NewerGPU/bindingscoexistence/artifacthosting remain explicitly deferred.",
+        "payload_json": "{\"authority_commit\": \"4b6e38e714e2ee7c38f8cb9fc598ec88eabe641b\", \"changed_owned_paths\": [\"docs/experiment-engine.md\", \"planning/attention-study-results.md\"], \"checkpoints\": [], \"completion_commit\": \"4b6e38e714e2ee7c38f8cb9fc598ec88eabe641b\", \"completion_gates\": [], \"completion_revision\": 13, \"finalized_checkpoints\": [], \"gates\": [], \"git_diffstat\": \"docs/experiment-engine.md | 9 +++++++++\\n 1 file changed, 9 insertions(+)\", \"git_head\": \"4b6e38e714e2ee7c38f8cb9fc598ec88eabe641b\", \"integration_commit\": null, \"interfaces\": [], \"note\": \"Merged/pushed qualified engine to main669b3a1 first. Delivered and native-qualified per-device CUDA NCU policy (sourceb70d76b pushed). Completed four-version V100 attention study across four GPUs: strict gqa-parallel-merge confirmed1.42958054x vs strongest valid split16,95%round-bootstrapCI[1.42907591,1.43014997],all6cases improved. All24inputs pass; acceptedwinner/baseline/correctedmaterializedcontrol each pass mem/race/sync. Independent audits cover720rawtimingrecords. Preserved and disqualified racy mixed/originalmaterialized alternatives; one-barrier correctedbaseline control qualified. No submodule source/gitlink edits. Five attention profiles.2270.28767summed admittedGPUseconds including allfailed/policyattempts;allresourcesreleased/no compute processes. Eleven focused taskCPUchecks,17policyregressions,63originalenginepremergechecks. Portable5887-file archive streamverified SHA25662b11ea83172827bae4cee0b67b56a16c906e3265197d1716a740ea260201e61 at runs/attention-decode-study/delivery/. Final report planning/attention-study-results.md; task source signed-off history bundle4ba784f. NewerGPU/bindingscoexistence/artifacthosting remain explicitly deferred.\", \"producer_commit\": \"4b6e38e714e2ee7c38f8cb9fc598ec88eabe641b\", \"producer_root\": \"/home/tumlinson/kda\", \"resources\": [], \"task_id\": \"KDA-ATTENTION-STUDY\"}",
+        "revision": 13,
+        "task_id": "KDA-ATTENTION-STUDY"
+      },
       {
         "claim_id": null,
         "created_at": "2026-10-18T02:19:53Z",
@@ -375,9 +395,9 @@
     "tasks": [
       {
         "attention_reason": null,
-        "completion_commit": null,
-        "completion_git_head": null,
-        "completion_revision": null,
+        "completion_commit": "4b6e38e714e2ee7c38f8cb9fc598ec88eabe641b",
+        "completion_git_head": "4b6e38e714e2ee7c38f8cb9fc598ec88eabe641b",
+        "completion_revision": 13,
         "created_at": "2026-10-18T09:04:49Z",
         "id": "KDA-ATTENTION-STUDY",
         "kind": "task",
@@ -389,14 +409,14 @@
         "parallel_policy": "serial",
         "parent_id": null,
         "priority": 100,
-        "result": null,
+        "result": "validated",
         "result_policy_json": "{\"allowed_dispositions\": [\"validated\"]}",
-        "revision": 12,
-        "status": "in_progress",
+        "revision": 13,
+        "status": "done",
         "tags_json": "[]",
         "title": "Run a profiler-informed dense decode attention study",
-        "updated_at": "2026-10-18T09:05:29Z",
-        "version": 2
+        "updated_at": "2026-10-18T10:38:18Z",
+        "version": 3
       },
       {
         "attention_reason": null,
@@ -684,12 +704,12 @@
     "workflow_lane_tasks": [
       {
         "activated_at": "2026-10-18T09:05:29Z",
-        "completed_at": null,
+        "completed_at": "2026-10-18T10:38:18Z",
         "enqueued_at": "2026-10-18T09:04:49Z",
         "lane_id": "KDA-ATTENTION-INTEGRATE",
         "position": 0,
-        "revision": 12,
-        "state": "active",
+        "revision": 13,
+        "state": "completed",
         "task_id": "KDA-ATTENTION-STUDY"
       },
       {
@@ -729,11 +749,11 @@
         "created_at": "2026-10-18T09:04:49Z",
         "id": "KDA-ATTENTION-INTEGRATE",
         "parent_lane_id": null,
-        "revision": 12,
+        "revision": 13,
         "role": "integrator",
         "run_id": "KDA-ATTENTION-RUN-1",
-        "state": "active",
-        "updated_at": "2026-10-18T09:05:29Z",
+        "state": "closed",
+        "updated_at": "2026-10-18T10:38:18Z",
         "workspace_mode": "exclusive"
       },
       {
@@ -829,10 +849,10 @@
         "completed_at": null,
         "created_at": "2026-10-18T09:04:49Z",
         "id": "KDA-ATTENTION-RUN-1",
-        "revision": 11,
+        "revision": 13,
         "root_task_id": "KDA-ATTENTION-STUDY",
-        "status": "active",
-        "updated_at": "2026-10-18T09:04:49Z"
+        "status": "completed",
+        "updated_at": "2026-10-18T10:38:18Z"
       },
       {
         "active_charter_version": 1,

@@ -262,3 +262,12 @@ binary NCU report analyzed by the pinned skill. See
 regression results and the local evidence archive. This qualifies that device,
 toolchain and workload contract; other kernels and environments still need
 their own correctness and measurement evidence.
+
+A subsequent [profiler-informed attention study](../planning/attention-study-results.md)
+exercised architecture retrieval, competing designs, paired selection, scoped
+profiling, a measured revision and independent evidence review. It also exposed
+shared-memory races that seeded numerical checks had missed. For transformations
+that change shared-memory or synchronization behavior, put bounded sanitizer
+checks in task-owned validation or required pre-promotion qualification. A passing
+numerical sample suite alone does not establish race freedom. Rejected and unsafe
+alternatives should retain their source, results and failure rationale.
