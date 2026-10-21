@@ -115,15 +115,15 @@ All frozen `benchmark_runs/` paths and the active CUDA runner's source digest
 were preserved; only current guidance, qualification metadata, and the changed
 README's provenance digest were updated.
 
-## Delivery
+## Initial local delivery
 
 All new raw logs and agent outputs are under ignored
 `runs/integration-closeout-20261021/`; the original evidence is preserved.
-Component corrections are committed before KDA's final gitlink update. Local
-component commit availability is required: these unpublished revisions are not
-claimed to be fetchable from their GitHub URLs. No push, local-main merge,
-host-global skill installation, service restart, or GPU campaign is part of
-this closeout.
+Component corrections were committed before KDA's final gitlink update. At
+this initial delivery, component commits were available locally and not yet
+fetchable from their GitHub URLs. No push or local-main merge was performed
+until the subsequent publication authorization below. No host-global skill
+installation, service restart, or GPU campaign was performed.
 
 Verified incremental component bundles and their SHA-256/size manifest are in
 `runs/integration-closeout-20261021/components/`. The KernelBender bundle
@@ -131,3 +131,24 @@ requires base `bcbba51e0ba3ebeac10f5bfda68832ccdcfc43cf`; the Wiki bundle
 requires `244283cb8b57d1695af61aaa5e0cf5a04edfe9c9`. Both bases already exist
 in the local submodule histories. These are local recovery artifacts, not
 publication or full standalone source archives.
+
+## Publication follow-up
+
+The user subsequently authorized component-first publication and merging the
+completed branches onto `main`. KernelBender `main` now publishes `2e19a74`;
+KernelWiki `main` and its preserved legacy `master` publish `542ed70`. The
+completed Wiki safety branch is also published. Component pushes preceded KDA
+publication, and independent fresh remote clones check that all three exact
+KDA submodule pins can be fetched. The older ncu-report-skill pin remains
+intentional; its latest main differs only in Todo configuration.
+
+KDA's completed feature, integration, and backup branch histories are contained
+in `main`, including the fetched NVIDIA `upstream/main`. Merges were fast-forward
+updates with no history rewriting or branch deletion. The clean standalone
+KernelBender and KernelWiki checkouts were synchronized to their published
+`main` branches. The validated implementation and submodule pins are unchanged
+by this publication follow-up; existing regression results still apply.
+
+Publication checks, remote-ref identities, and fresh-fetch verification are
+retained under ignored `runs/publication-20261021/`. The initial local-only
+availability limitation above is superseded by this publication.

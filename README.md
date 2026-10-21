@@ -92,7 +92,7 @@ Agents can also explicitly invoke the entries at `skills/KernelWiki/SKILL.md`,
 `skills/ncu-report-skill/SKILL.md`, and the KernelBender path above, resolved
 against the KDA checkout. No host-global installation is required for that
 route. See the [integration closeout](planning/integration-closeout-2026-10-21.md)
-for the validated pair, actual skill-use evidence, and local-only availability.
+for the validated pair, actual skill-use evidence, and publication verification.
 
 Install the `humanize` Claude Code plugin from the Claude Code plugin UI:
 
