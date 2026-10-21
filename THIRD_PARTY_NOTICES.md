@@ -14,8 +14,9 @@ Verbatim copies of the upstream license files referenced below are provided in
 
 - Path: `skills/KernelWiki`
 - Source: <https://github.com/mit-han-lab/KernelWiki.git>
+- Consumed fork: <https://github.com/tumlinso/KernelWiki.git>
 - Upstream base revision: `76d27b56f804e7e7295d4c570e1e5d7eef4b0a75`
-- Pinned fork revision: `244283cb8b57d1695af61aaa5e0cf5a04edfe9c9`
+- Pinned fork revision: `542ed702ac662422d55b19186562b29abbb5da29`
 - Distributed revision: the gitlink recorded at `skills/KernelWiki`
 - License for original KernelWiki material: MIT
 - License text: [`third_party_licenses/MIT-hanlab.txt`](third_party_licenses/MIT-hanlab.txt)
@@ -25,10 +26,18 @@ license of an artifact is determined by its upstream project and any
 file-specific notice, not by KernelWiki's MIT license. The component inventory
 below covers all 89 bundles in the distributed checkout.
 
+The fork's added architecture contracts and design-source references retain
+their source identities and evidence limits. KernelBender's consolidation
+handoff and provenance records identify the separately maintained Atlas source;
+no Atlas archive or prose is redistributed by this KDA integration. Access-gated
+source locators and unpublished component commits are identified in the
+[integration closeout](planning/integration-closeout-2026-10-21.md).
+
 ### ncu-report-skill
 
 - Path: `skills/ncu-report-skill`
 - Source: <https://github.com/mit-han-lab/ncu-report-skill.git>
+- Consumed fork: <https://github.com/tumlinso/ncu-report-skill.git>
 - Pinned fork revision: `bbb60a67fcb44c65510386c7dd41bc327fb91d25`
 - License: MIT
 - Copyright: Copyright (c) 2026 hanlab
@@ -38,7 +47,7 @@ below covers all 89 bundles in the distributed checkout.
 
 - Path: `skills/KernelBender`
 - Source: <https://github.com/tumlinso/KernelBender.git>
-- Pinned revision: `bcbba51e0ba3ebeac10f5bfda68832ccdcfc43cf`
+- Pinned revision: `2e19a747a3be2abfb12243db809a3e85ae8b5d42`
 - License: no license file selected in this revision; KDA's first-party license does not apply to this independent repository.
 
 ## KernelWiki Artifact Components

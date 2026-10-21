@@ -37,6 +37,8 @@ git submodule status
 mkdir -p ~/.claude/skills
 ln -s "$(pwd)/skills/ncu-report-skill" ~/.claude/skills/ncu-report-skill
 ln -s "$(pwd)/skills/KernelWiki" ~/.claude/skills/KernelWiki
+# optional design skill: link its nested entry directory
+ln -s "$(pwd)/skills/KernelBender/skills/kernelbender" ~/.claude/skills/kernelbender
 
 # or clone the independently licensed ncu skill directly
 mkdir -p ~/.claude/skills && cd ~/.claude/skills
@@ -63,9 +65,9 @@ The following third-party projects are included as Git submodules. The source UR
 
 | Path | Source | Pinned revision | License |
 |---|---|---|---|
-| `skills/KernelWiki` | [tumlinso/KernelWiki](https://github.com/tumlinso/KernelWiki.git) | [`244283cb8b57d1695af61aaa5e0cf5a04edfe9c9`](https://github.com/tumlinso/KernelWiki/commit/244283cb8b57d1695af61aaa5e0cf5a04edfe9c9) | MIT for original material; embedded artifacts retain their upstream terms; restricted CuTe DSL artifacts are omitted |
+| `skills/KernelWiki` | [tumlinso/KernelWiki](https://github.com/tumlinso/KernelWiki.git) | [`542ed702ac662422d55b19186562b29abbb5da29`](https://github.com/tumlinso/KernelWiki/commit/542ed702ac662422d55b19186562b29abbb5da29) | MIT for original material; embedded artifacts retain their upstream terms; restricted CuTe DSL artifacts are omitted |
 | `skills/ncu-report-skill` | [tumlinso/ncu-report-skill](https://github.com/tumlinso/ncu-report-skill.git) | [`bbb60a67fcb44c65510386c7dd41bc327fb91d25`](https://github.com/tumlinso/ncu-report-skill/commit/bbb60a67fcb44c65510386c7dd41bc327fb91d25) | MIT |
-| `skills/KernelBender` | [tumlinso/KernelBender](https://github.com/tumlinso/KernelBender.git) | [`bcbba51e0ba3ebeac10f5bfda68832ccdcfc43cf`](https://github.com/tumlinso/KernelBender/commit/bcbba51e0ba3ebeac10f5bfda68832ccdcfc43cf) | No license file selected |
+| `skills/KernelBender` | [tumlinso/KernelBender](https://github.com/tumlinso/KernelBender.git) | [`2e19a747a3be2abfb12243db809a3e85ae8b5d42`](https://github.com/tumlinso/KernelBender/commit/2e19a747a3be2abfb12243db809a3e85ae8b5d42) | No license file selected |
 
 The KernelWiki and ncu-report-skill revisions include the completed Volta knowledge and profiling ports.
 After pulling KDA updates, synchronize the skill checkouts to the recorded pins:
@@ -85,6 +87,12 @@ path explicitly through the host agent mechanism. This integration does not
 change KDA validation or establish a performance benefit.
 
 These submodules are not covered by this repository's first-party license. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for the applicable license text and additional details.
+
+Agents can also explicitly invoke the entries at `skills/KernelWiki/SKILL.md`,
+`skills/ncu-report-skill/SKILL.md`, and the KernelBender path above, resolved
+against the KDA checkout. No host-global installation is required for that
+route. See the [integration closeout](planning/integration-closeout-2026-10-21.md)
+for the validated pair, actual skill-use evidence, and local-only availability.
 
 Install the `humanize` Claude Code plugin from the Claude Code plugin UI:
 

@@ -30,6 +30,13 @@ retain evidence for selection. See
 extension boundary. A task can continue using the simple one-candidate flow
 when a batch evaluator is not useful.
 
+For architecture research, explicitly invoke `skills/KernelWiki/SKILL.md` from
+the KDA checkout; for profiling and report interpretation, invoke
+`skills/ncu-report-skill/SKILL.md`. Resolve repository skill paths against KDA,
+not the separate implementation workspace. Record the component revisions and
+retrieved source or report identities. Explicit path invocation does not require
+host-global installation or recursive skill discovery.
+
 ## Optional Structural Design Review
 
 When a task leaves meaningful freedom in representation, composition, or reuse,

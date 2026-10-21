@@ -17,7 +17,11 @@ You are working in a task implementation workspace. Your job is to produce the b
 
 1. Read the repository structure, existing implementation, tests, and task documentation.
 2. Identify the baseline behavior and the validation path.
-3. Research only the references needed for this task.
+3. Research only the references needed for this task. From the KDA checkout,
+   explicitly invoke `skills/KernelWiki/SKILL.md` for architecture contracts and
+   `skills/ncu-report-skill/SKILL.md` for profiling and report interpretation.
+   Resolve these paths relative to KDA, even when implementing elsewhere, and
+   record the consumed revisions and source/report identities in task evidence.
 4. If the task leaves meaningful freedom in representation, composition, or
    reuse—or the caller requests a structural rethink—consider the optional
    experimental KernelBender skill at

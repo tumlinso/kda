@@ -91,9 +91,9 @@ passing independent numerical checks. Failed alternatives remain preserved:
   not a fifth optimization strategy. The initial comparison with the unsafe
   baseline remains historical evidence, not a qualified speedup claim. See
   [control logs](../runs/attention-decode-study/workspace/sanitizers/baseline-audit/manifest.json).
-- The pinned KernelWiki materialized source contains the same scratch-reuse
+- The study-pinned KernelWiki materialized source contains the same scratch-reuse
   pattern. The finding is recorded for its independent maintainer; neither
-  submodule source nor gitlink was changed. The corrected downstream source is
+  submodule source nor gitlink was changed during the study. The corrected downstream source is
   [available here](../runs/attention-decode-study/workspace/candidate-sources/materialized-corrected/).
 
 The first fanout used the wrong UUID field; the first benchmark adapter assumed
@@ -130,7 +130,7 @@ preserves the complete signed-off task history at `4ba784f`. See the
 
 Archive SHA-256: `62b11ea83172827bae4cee0b67b56a16c906e3265197d1716a740ea260201e61`.
 
-Raw artifacts remain local; shared artifact hosting is a separate follow-up. KernelWiki remains pinned
+Raw artifacts remain local; shared artifact hosting is a separate follow-up. At study close, KernelWiki was pinned
 to `244283cb8b57d1695af61aaa5e0cf5a04edfe9c9` and ncu-report-skill to
 `bbb60a67fcb44c65510386c7dd41bc327fb91d25`. Newer-GPU qualification and profiler
 binding coexistence remain separate work.

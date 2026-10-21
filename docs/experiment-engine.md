@@ -205,7 +205,7 @@ profiling interpretation through its documented reports. When using either,
 record the dependency revision and cite the page or report alongside the task
 evidence. KDA does not duplicate their architecture catalog or profiling
 pipeline. KDA pins the completed Volta ports through its existing submodules:
-KernelWiki `244283cb8b57d1695af61aaa5e0cf5a04edfe9c9` and ncu-report-skill
+KernelWiki `542ed702ac662422d55b19186562b29abbb5da29` and ncu-report-skill
 `bbb60a67fcb44c65510386c7dd41bc327fb91d25`. See the top-level README for
 checkout synchronization. Continue consuming their documented interfaces rather
 than copying their architecture knowledge or profiler implementation.
@@ -215,12 +215,19 @@ Focused dependency consumer checks require no GPU:
 ```bash
 PYTHONDONTWRITEBYTECODE=1 python3 skills/KernelWiki/scripts/query.py --architecture V100 --type hardware --compact --limit 5
 PYTHONDONTWRITEBYTECODE=1 python3 skills/KernelWiki/scripts/get_page.py hw-volta-mma --follow-sources
+PYTHONDONTWRITEBYTECODE=1 python3 skills/KernelBender/tests/check_knowledge_pair.py --wiki skills/KernelWiki
 PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s skills/KernelWiki/tests -p 'test_volta_architecture.py' -v
 PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s skills/ncu-report-skill/tests -v
 ```
 
 These exercise knowledge retrieval and offline profiling compatibility, rather
 than collecting a new GPU profile or qualifying an engine optimization run.
+The paired check resolves KernelBender's 17 exact Wiki hardware contracts,
+including architecture/confidence filters and source closure. KernelBender
+supplies optional design reasoning through its existing nested skill entry;
+it adds no engine statuses, evidence kinds, or evaluation policy. See the
+[integration closeout](../planning/integration-closeout-2026-10-21.md) for actual
+skill consumption and the audit of the completed GPU study.
 
 The extension should remain a small set of replaceable modules and narrow
 workflow edits. When upstream KDA adds equivalent behavior, compare it against
@@ -239,10 +246,12 @@ separately and update them only to inspected, compatible revisions.
 The unit suite is run with:
 
 ```text
-python3 -m unittest discover -s tests -v
+python3 -m pytest tests -q
 ```
 
-The CPU-only CLI fixture can be run independently with:
+The suite includes upstream's pytest-based export tests; install `pytest` in
+the test environment. `unittest discover` alone does not execute those function
+tests. The CPU-only CLI fixture can be run independently with:
 
 ```text
 python3 -m unittest tests.test_cli_integration -v
