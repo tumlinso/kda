@@ -106,6 +106,8 @@ Install the `humanize` Claude Code plugin from the Claude Code plugin UI:
 
 The workflow is intentionally independent of any single benchmark harness or hardware target. A downstream task can add its own evaluator, datasets, profiling tools, and domain-specific references.
 
+Validated CuTe candidates can be [exported as Hugging Face kernels](docs/huggingface-export.md).
+
 ## Recommended Workspace Layout
 
 Use this repository as reference material, then do implementation work elsewhere:
