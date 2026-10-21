@@ -34,12 +34,11 @@ retain evidence for selection. See
 extension boundary. A task can continue using the simple one-candidate flow
 when a batch evaluator is not useful.
 
-For architecture research, explicitly invoke `skills/KernelWiki/SKILL.md` from
-the KDA checkout; for profiling and report interpretation, invoke
-`skills/ncu-report-skill/SKILL.md`. Resolve repository skill paths against KDA,
-not the separate implementation workspace. Record the component revisions and
-retrieved source or report identities. Explicit path invocation does not require
-host-global installation or recursive skill discovery.
+When relevant, read the pinned skill instructions and linked references from
+the KDA checkout: KernelWiki for architecture research and ncu-report-skill for
+profiling and report interpretation. Resolve these paths against KDA, not the
+separate implementation workspace. Record component revisions and retrieved
+source or report identities. Host-specific skill registration is optional.
 
 ## Optional Structural Design Review
 
@@ -47,9 +46,9 @@ When a task leaves meaningful freedom in representation, composition, or reuse,
 or the caller requests a structural rethink, an agent may consult the
 experimental KernelBender skill before settling the design in `docs/draft.md`.
 The pinned entry point is
-`skills/KernelBender/skills/kernelbender/SKILL.md`; use the host agent
-mechanism to register or invoke this path explicitly. A conventional or library
-solution remains valid. Keep KDA’s task contract, independent correctness
+`skills/KernelBender/skills/kernelbender/SKILL.md`; read its instructions and
+follow its relevant references. A conventional or library solution remains
+valid. Keep KDA’s task contract, independent correctness
 validation, and evaluation loop authoritative. Re-enter this review if new
 evidence exposes a structural limit or the caller changes reuse, output, or
 target constraints; routine tuning can continue without repeating it.
@@ -60,10 +59,13 @@ Each task should state:
 
 - Objective.
 - Inputs and outputs.
+- Target GPU and toolchain constraints, with representative shapes and dtypes.
 - Correctness requirements.
+- Independent reference and baseline.
 - Constraints on implementation language, dependencies, APIs, or deployment.
 - Validation command.
 - Evaluation command, if different from validation.
+- Resource budget.
 - Promotion criteria.
 
 ## Evidence Records

@@ -1,82 +1,86 @@
 # Kernel Design Agents
 
-Kernel Design Agents (KDA) is an agent-centric workflow for using coding agents to research, implement, verify, and iterate on performance-sensitive CUDA kernel tasks.
+Kernel Design Agents (KDA) is a workflow for local and hosted agents to
+research, implement, verify, profile, and optimize NVIDIA CUDA kernels.
+This published fork retains compatibility
+with NVIDIA's upstream KDA workflow and adds an optional standard-library
+candidate evaluator plus three pinned instruction/reference bundles for
+structural design, architecture knowledge, and profiler report analysis.
 
-This repository documents an early research prototype and remains under active development. Community feedback and contributions are welcome. If you are interested in HAN Lab Mafia's solutions ranking #1–3 on tracks at the MLSys Kernel Contest, see [mit-han-lab/mlsys2026-flashinfer-contest](https://github.com/mit-han-lab/mlsys2026-flashinfer-contest) for performance evaluation and reproduction.
+Its docs and prompts use ordinary repository files and shell commands; they
+do not require a particular agent runtime, model API, or global skill registry. The included
+instruction bundles can be read directly, with optional host-specific skill
+registration where available.
 
-## Contents
+## Start a task
+
+Begin in the task's own repository or implementation workspace. Read its
+instructions and identify the code, tests, correctness reference, evaluation
+commands, project authority, and any GPU execution controls. KDA is workflow
+guidance; the task repository owns implementation, validation inputs, and
+evidence.
+
+For a new implementation or optimization task, define the operation and target
+GPU, representative shapes and dtypes, tolerance and independent correctness
+reference, metric and baseline, resource budget, and promotion criteria. Copy
+and fill [the starter prompt](prompts/basic-flow.md), then use
+[the consumer entrypoint](docs/agent-entry.md) to guide the agent. Write
+`docs/draft.md` in the task workspace before editing implementation code.
+
+For a research-only or profiling-only request, read the relevant guidance and
+use the matching pinned reference bundle without creating a full optimization
+task or candidate-engine setup.
+
+```text
+Use KDA at <KDA_CHECKOUT> as an optional workflow reference. Read
+<KDA_CHECKOUT>/docs/agent-entry.md and follow this task repository's
+instructions. Keep implementation and evidence in this task workspace.
+```
+
+No host-specific setup is needed beyond a readable KDA checkout and the tools
+required by the task. When using the optional candidate evaluator, use Python 3
+as described in [the experiment engine guide](docs/experiment-engine.md).
+
+## What is included
 
 | Path | Purpose |
 |---|---|
-| `docs/agent-flow.md` | Minimal end-to-end KDA workflow. |
-| `docs/agent-entry.md` | Consumer entrypoint for agents applying KDA in another task workspace. |
-| `docs/experiment-engine.md` | Optional candidate evaluator, evidence, and upstream extension boundary. |
-| `prompts/README.md` | How to use prompt templates. |
-| `planning/` | Repository plans and Project Control authority guidance. |
-| `prompts/basic-flow.md` | Generic starter prompt for a new task. |
-| `CLAUDE.md` | Repository-facing agent instructions. |
-| `AGENTS.md` | Codex instructions for work on this repository. |
-| `CONTRIBUTING.md` | Contribution process and DCO sign-off requirements. |
-| `THIRD_PARTY_NOTICES.md` | Third-party component and license disclosures. |
-| `third_party_licenses/` | Verbatim upstream license files for distributed third-party components. |
+| `docs/agent-entry.md` | Consumer entrypoint for work in another task workspace. |
+| `docs/agent-flow.md` | Reusable design, implementation, and evidence loop. |
+| `prompts/basic-flow.md` | Copyable task prompt with contract fields. |
+| `docs/experiment-engine.md` | Optional candidate evaluator and evidence format. |
+| `skills/` | Pinned instruction and reference bundles; use only as relevant. |
 
-## Community Kernel Wishlist
+The docs distinguish repository editing from downstream use: `AGENTS.md` and
+`CLAUDE.md` describe work on this KDA checkout. For a task in another
+repository, start at `docs/agent-entry.md` and follow that task repository's
+authority and instructions.
 
-Have a kernel that needs optimization? [Submit a request](https://github.com/NVlabs/kda/tree/wishlist#submit) directly as a pull request to `wishlist`, with a reproducible definition, representative workloads, and your best-known baseline implementation. No issue is required. The community wishlist currently supports NVIDIA B200 and B300 GPUs only.
+## Checkout and optional reference bundles
 
-[Browse and upvote requests](https://github.com/NVlabs/kda/pulls?q=is%3Apr%20base%3Awishlist), [discuss an idea](https://github.com/NVlabs/kda/issues/new?title=%5Bwishlist%5D%20) if you need help preparing the files, or visit the [project website](https://nvlabs.github.io/kda/). Keep request details in `requests/<github-username>-<kernel-name>/README.md` and use the [wishlist PR template](.github/PULL_REQUEST_TEMPLATE/wishlist.md) for the short description. Merging records the request, while optimization progress and result links remain on the original pull request. Website source lives on `pages`; the PR template and issue chooser settings are maintained on `main`.
-
-## Getting Started
-
-### For agents using KDA in another task repository
-
-Start with the [KDA agent entrypoint](docs/agent-entry.md). It explains how to
-use KDA's workflow and pinned skills while keeping task code and evidence in
-the task's own workspace. The entrypoint also includes a copyable launch
-instruction. Paths to KDA skills are resolved from the KDA checkout, so this
-works when the agent's current directory is elsewhere.
-
-`AGENTS.md` gives Codex instructions for editing this KDA repository;
-`CLAUDE.md` records KDA repository conventions. Neither replaces the consumer
-entrypoint for downstream work.
-
-### Checkout and optional Claude Code setup
-
-Initialize the pinned checkout before starting the agent session. Claude Code
-users can also create the optional skill links shown below; other agents can
-consume the entries explicitly as described in the agent entrypoint.
+The evaluator can be used without initializing the skill submodules. To use
+the pinned reference bundles, clone the KDA checkout and initialize its
+recorded submodule revisions:
 
 ```bash
-git clone https://github.com/tumlinso/kda.git
-cd kda
-git submodule update --init --recursive
-git submodule status
-
-# link skills
-mkdir -p ~/.claude/skills
-ln -s "$(pwd)/skills/ncu-report-skill" ~/.claude/skills/ncu-report-skill
-ln -s "$(pwd)/skills/KernelWiki" ~/.claude/skills/KernelWiki
-# optional design skill: link its nested entry directory
-ln -s "$(pwd)/skills/KernelBender/skills/kernelbender" ~/.claude/skills/kernelbender
-
-# or clone the independently licensed ncu skill directly
-mkdir -p ~/.claude/skills && cd ~/.claude/skills
-git clone https://github.com/mit-han-lab/ncu-report-skill.git
+KDA_CHECKOUT=/path/to/kda
+git clone https://github.com/tumlinso/kda.git "$KDA_CHECKOUT"
+git -C "$KDA_CHECKOUT" submodule update --init --recursive
+git -C "$KDA_CHECKOUT" submodule status
 ```
 
 This fork's `.gitmodules` entries use SSH URLs for the independently maintained
-skill forks. Initializing the submodules therefore requires a GitHub SSH key
-with access to those repositories, even though the KDA root was cloned over
-HTTPS. The update command checks out the revisions recorded by this KDA commit;
-`git submodule status` shows those revisions.
+skill forks. Initializing them therefore requires a GitHub SSH key with access
+to those repositories, even though the KDA root is cloned over HTTPS. The
+submodule command checks out the revisions recorded by KDA; `git submodule status`
+shows those revisions. Directly reading their `SKILL.md` files and
+linked references works independently of host-wide registration.
 
 For NVIDIA's upstream KDA project, use its
 [official repository](https://github.com/NVlabs/kda). That checkout follows
-upstream's own submodule configuration and does not include this fork's
-additional integrations. When using this fork, prefer the pinned KernelWiki
-submodule. A direct upstream KernelWiki checkout may contain artifact
-snapshots governed by additional terms that are omitted from this
-distribution.
+upstream's own workflow and submodule configuration. This fork's evaluator,
+KernelBender route, and component revisions listed below remain optional
+additions to that workflow.
 
 ## Submodules
 
@@ -98,61 +102,43 @@ git submodule update --init --recursive
 
 Use the committed gitlinks rather than automatically tracking skill branches.
 
-KernelBender is an optional experimental design skill for reconsidering GPU
+KernelBender is an optional experimental design reference for reconsidering
 computation structure when a task leaves meaningful freedom in representation,
-composition, or reuse. Its entry point is
-`skills/KernelBender/skills/kernelbender/SKILL.md`; register or invoke that
-path explicitly through the host agent mechanism. This integration does not
-change KDA validation or establish a performance benefit.
+composition, or reuse. The three pinned bundles have separate purposes:
+KernelBender for structural design, KernelWiki for architecture knowledge, and
+ncu-report-skill for Nsight Compute profiling and report interpretation. They
+can be read directly from the KDA checkout. No automatic discovery or
+registration is implied.
 
 These submodules are not covered by this repository's first-party license. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for the applicable license text and additional details.
 
-Agents can also explicitly invoke the entries at `skills/KernelWiki/SKILL.md`,
-`skills/ncu-report-skill/SKILL.md`, and the KernelBender path above, resolved
-against the KDA checkout. No host-global installation is required for that
-route. See the [integration closeout](planning/integration-closeout-2026-10-21.md)
-for the validated pair, actual skill-use evidence, and publication verification.
+One archived V100 attention study demonstrates the complete design-to-promotion
+workflow and reports a positive result. It does not establish qualification on
+newer GPU generations or a causal performance benefit from any one reference
+bundle. See the [integration closeout](planning/integration-closeout-2026-10-21.md)
+for evidence and limits. New tasks still need their own trusted correctness
+reference, validator, and workload-specific acceptance criteria.
 
-For optional Humanize planning in Claude Code, install the `humanize` plugin
-from the Claude Code plugin UI:
+The workflow can use a task's existing harness. For repeatable batches of
+competing candidates, the optional [`kda_experiments` evaluator](docs/experiment-engine.md)
+retains candidate snapshots and evidence while the agent chooses what to try
+and the task defines acceptance criteria. Validated CuTe candidates can be
+[exported as Hugging Face kernels](docs/huggingface-export.md).
 
-```text
-/plugin marketplace add PolyArch/humanize
-/plugin install humanize@PolyArch
-```
+## Upstream community wishlist
 
-## Minimal Flow
-
-1. Create a separate implementation workspace for the target task.
-2. Define the task contract: objective, constraints, validation command, and promotion criteria.
-3. Start an agent session in the implementation workspace.
-4. Give the agent `prompts/basic-flow.md`, filled in with the task-specific details.
-5. Ask the agent to write a short plan draft to `docs/draft.md` in the implementation workspace.
-6. Convert the draft into an executable plan, either manually or with a planning tool such as Humanize.
-7. Implement in small iterations, verifying after each meaningful change.
-8. Record candidates, benchmark or evaluation results, profiling evidence, and final promotion decisions. For repeatable candidate batches, use the optional [`kda_experiments` engine](docs/experiment-engine.md) from the existing agent workflow.
-
-The workflow is intentionally independent of any single benchmark harness or hardware target. A downstream task can add its own evaluator, datasets, profiling tools, and domain-specific references.
-
-Validated CuTe candidates can be [exported as Hugging Face kernels](docs/huggingface-export.md).
-
-## Recommended Workspace Layout
-
-Use this repository as reference material, then do implementation work elsewhere:
-
-```text
-task-workspace/
-  docs/
-    draft.md
-    plan.md
-  runs/
-  outputs/
-  profile/
-  benchmark.csv
-  candidates.jsonl
-```
-
-The exact files can change by domain. The important rule is that the agent records enough context for another engineer to understand what was tried, what passed validation, and why the final candidate was selected.
+The NVIDIA upstream project also has a community wishlist. Have a kernel that
+needs optimization? [Submit a request](https://github.com/NVlabs/kda/tree/wishlist#submit)
+as a pull request to `wishlist`, with a reproducible definition,
+representative workloads, and the best-known baseline. The wishlist currently
+supports NVIDIA B200 and B300 GPUs only. [Browse and upvote requests](https://github.com/NVlabs/kda/pulls?q=is%3Apr%20base%3Awishlist),
+[discuss an idea](https://github.com/NVlabs/kda/issues/new?title=%5Bwishlist%5D%20),
+or visit the [project website](https://nvlabs.github.io/kda/). Request details
+belong in `requests/<github-username>-<kernel-name>/README.md`; use the
+[wishlist PR template](.github/PULL_REQUEST_TEMPLATE/wishlist.md). Merging
+records the request, while optimization progress and result links remain on
+the original pull request. Website source lives on `pages`; the PR template
+and issue chooser settings are maintained on `main`.
 
 ## Contributing
 

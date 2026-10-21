@@ -9,6 +9,17 @@ reference, validators, benchmark driver, inputs, and numerical requirements.
 The current engine targets POSIX hosts, matching its file-lock and process-group
 execution controls.
 
+Start with the [agent entrypoint](agent-entry.md) to choose the appropriate
+workflow. This guide applies when a task needs repeatable candidate comparison;
+architecture research and profiling-only requests can use the relevant skill
+directly. Each task supplies its own contract, trusted harness, and execution
+configuration before calling the engine.
+
+Local and hosted agents use the same file and command interfaces. The engine
+requires no model API, agent framework, plugin system, or skill registry.
+The caller supplies task files and invokes the Python CLI; toolchain, GPU,
+profiler, and execution-policy dependencies remain task and host concerns.
+
 ## Source and extension boundary
 
 KDA's upstream workflow already describes the optimization loop and workspace
@@ -27,16 +38,17 @@ The engine owns candidate identity and snapshots, build/evaluation stages,
 result validation, experiment records, comparisons, and preferred-candidate
 references. Task workspaces own candidate code and all trusted evaluation
 inputs; candidate sources cannot replace the reference, validators, or timing
-driver. Project Control remains authoritative for repository tasks.
+driver. The task repository retains its own project authority and execution
+policy; using KDA does not move its task state into KDA's registered workspace.
 
-The custom runtime lives entirely in `kda_experiments/`; tests live in `tests/`.
-Necessary upstream integration edits are limited to `README.md`,
-`docs/agent-flow.md`, and `prompts/basic-flow.md`. This guide and the repository
-plan are additions. The runtime imports neither skill submodule: architecture
-research and profiling remain agent actions, with their references and artifacts
-recorded alongside experiments. The engine and its CPU checks work independently
-of both ports, and individual runtime components can be replaced by upstream
-equivalents without replacing the agent workflow.
+The optional standard-library runtime lives in `kda_experiments/`; its tests
+live in `tests/`. The evaluator connects to upstream's workflow through optional
+agent guidance and prompts. The runtime imports none of the three skill
+submodules: design, architecture research, and profiling remain agent actions,
+with references and artifacts recorded alongside experiments. The engine and
+its CPU checks work independently of those skills. Individual runtime
+components can be replaced by upstream equivalents without replacing the
+agent workflow.
 
 ## Use
 
@@ -199,16 +211,19 @@ or performance by themselves.
 
 ## Architecture knowledge, dependencies, and upstream updates
 
-KernelWiki supplies architecture guidance through its documented,
-architecture-filtered queries and page references. ncu-report-skill supplies
-profiling interpretation through its documented reports. When using either,
+KernelBender supplies optional structural design guidance. KernelWiki supplies
+architecture guidance through its documented, architecture-filtered queries
+and page references. ncu-report-skill supplies
+profiling interpretation through its documented reports. When using a skill,
 record the dependency revision and cite the page or report alongside the task
 evidence. KDA does not duplicate their architecture catalog or profiling
 pipeline. KDA pins the completed Volta ports through its existing submodules:
 KernelWiki `542ed702ac662422d55b19186562b29abbb5da29` and ncu-report-skill
 `bbb60a67fcb44c65510386c7dd41bc327fb91d25`. See the top-level README for
 checkout synchronization. Continue consuming their documented interfaces rather
-than copying their architecture knowledge or profiler implementation.
+than copying their design references, architecture knowledge, or profiler
+implementation. The [agent entrypoint](agent-entry.md) links each exact skill
+entry; the README records all three component pins.
 
 Focused dependency consumer checks require no GPU:
 

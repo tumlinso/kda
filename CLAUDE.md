@@ -14,24 +14,21 @@ work on KDA itself.
 - Put generated outputs in `runs/`, `outputs/`, or `profile/`; these paths are ignored by git.
 - Prefer documenting reusable workflow mechanics over documenting one task's private harness or acceptance thresholds.
 
-## Expected Agent Workflow
+## Maintaining KDA
 
-For a new task:
+- Keep NVIDIA upstream's agent workflow usable; additions such as the experiment
+  engine and pinned skills remain optional.
+- Keep repository plans in `planning/` and use the project workflow in
+  `AGENTS.md` for authoritative task state. This registration does not own tasks
+  in consumer repositories.
+- Preserve skill responsibilities and documented interfaces. KDA coordinates
+  their use; the experiment engine owns evaluation and selection rather than
+  kernel design or a second scheduler.
+- Run checks relevant to the change. The full runtime/export suite is
+  `python3 -m pytest tests -q`; documentation changes need link and consistency
+  checks. Existing hardware evidence is not a new GPU qualification.
+- Follow `CONTRIBUTING.md`, including signed-off commits and third-party notices.
 
-1. Create or enter a separate implementation workspace.
-2. Define the task objective, constraints, validation command, and promotion criteria.
-3. Use `prompts/basic-flow.md` as the starter prompt.
-4. Read local task code and documentation before proposing implementation changes.
-5. Write the initial plan draft to `docs/draft.md` inside the task workspace.
-6. Convert the draft into an executable plan.
-7. Implement in small iterations, validating each meaningful candidate.
-8. Record candidate relationships, evaluation results, and profiling evidence when applicable.
-9. Keep this repository focused on the reusable flow.
-
-## Optional Skills
-
-Use external skills only when they are relevant to the active task:
-
-- `humanize` for plan generation and implementation loops.
-- A domain knowledge skill for background research.
-- A profiling or report-analysis skill for performance evidence.
+The downstream design, implementation, validation, and promotion loop is
+documented in `docs/agent-entry.md`, `docs/agent-flow.md`, and the starter prompt.
+Keep those guides authoritative instead of duplicating their workflow here.
