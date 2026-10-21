@@ -2,6 +2,10 @@
 
 This repository is the generic Kernel Design Agents workflow reference. It should stay small and task-agnostic.
 
+For agents applying KDA to work in another repository, use the
+[consumer entrypoint](docs/agent-entry.md). This file describes conventions for
+work on KDA itself.
+
 ## Repository Rules
 
 - Use English for repository-facing files, comments, documentation, prompts, and commit messages.

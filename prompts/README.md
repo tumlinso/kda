@@ -2,6 +2,10 @@
 
 This directory stores generic prompts for the Kernel Design Agents workflow.
 
+Agents working in another repository should start with the
+[KDA agent entrypoint](../docs/agent-entry.md); it explains how this prompt,
+the optional skills, and the experiment engine fit together.
+
 The templates are intentionally task-agnostic. Fill in the task objective, constraints, validation command, and promotion criteria before starting an agent session in a separate implementation workspace.
 
 ## Available Templates

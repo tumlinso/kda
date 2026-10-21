@@ -9,11 +9,13 @@ This repository documents an early research prototype and remains under active d
 | Path | Purpose |
 |---|---|
 | `docs/agent-flow.md` | Minimal end-to-end KDA workflow. |
+| `docs/agent-entry.md` | Consumer entrypoint for agents applying KDA in another task workspace. |
 | `docs/experiment-engine.md` | Optional candidate evaluator, evidence, and upstream extension boundary. |
 | `prompts/README.md` | How to use prompt templates. |
 | `planning/` | Repository plans and Project Control authority guidance. |
 | `prompts/basic-flow.md` | Generic starter prompt for a new task. |
 | `CLAUDE.md` | Repository-facing agent instructions. |
+| `AGENTS.md` | Codex instructions for work on this repository. |
 | `CONTRIBUTING.md` | Contribution process and DCO sign-off requirements. |
 | `THIRD_PARTY_NOTICES.md` | Third-party component and license disclosures. |
 | `third_party_licenses/` | Verbatim upstream license files for distributed third-party components. |
@@ -25,7 +27,24 @@ Have a kernel that needs optimization? [Submit a request](https://github.com/NVl
 [Browse and upvote requests](https://github.com/NVlabs/kda/pulls?q=is%3Apr%20base%3Awishlist), [discuss an idea](https://github.com/NVlabs/kda/issues/new?title=%5Bwishlist%5D%20) if you need help preparing the files, or visit the [project website](https://nvlabs.github.io/kda/). Keep request details in `requests/<github-username>-<kernel-name>/README.md` and use the [wishlist PR template](.github/PULL_REQUEST_TEMPLATE/wishlist.md) for the short description. Merging records the request, while optimization progress and result links remain on the original pull request. Website source lives on `pages`; the PR template and issue chooser settings are maintained on `main`.
 
 ## Getting Started
-Install the agent workflow dependencies before starting the agent session:
+
+### For agents using KDA in another task repository
+
+Start with the [KDA agent entrypoint](docs/agent-entry.md). It explains how to
+use KDA's workflow and pinned skills while keeping task code and evidence in
+the task's own workspace. The entrypoint also includes a copyable launch
+instruction. Paths to KDA skills are resolved from the KDA checkout, so this
+works when the agent's current directory is elsewhere.
+
+`AGENTS.md` gives Codex instructions for editing this KDA repository;
+`CLAUDE.md` records KDA repository conventions. Neither replaces the consumer
+entrypoint for downstream work.
+
+### Checkout and optional Claude Code setup
+
+Initialize the pinned checkout before starting the agent session. Claude Code
+users can also create the optional skill links shown below; other agents can
+consume the entries explicitly as described in the agent entrypoint.
 
 ```bash
 git clone https://github.com/tumlinso/kda.git
@@ -94,7 +113,8 @@ against the KDA checkout. No host-global installation is required for that
 route. See the [integration closeout](planning/integration-closeout-2026-10-21.md)
 for the validated pair, actual skill-use evidence, and publication verification.
 
-Install the `humanize` Claude Code plugin from the Claude Code plugin UI:
+For optional Humanize planning in Claude Code, install the `humanize` plugin
+from the Claude Code plugin UI:
 
 ```text
 /plugin marketplace add PolyArch/humanize

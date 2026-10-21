@@ -1,5 +1,9 @@
 # Repository instructions
 
+For a downstream kernel task, start with the [KDA agent entrypoint](docs/agent-entry.md)
+and work in that task's implementation workspace. This file governs changes to
+KDA itself.
+
 Follow `CLAUDE.md` for repository scope and contribution conventions. Keep
 repository plans in `planning/` and use supported Project Control operations
 to change authoritative task state.

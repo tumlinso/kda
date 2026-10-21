@@ -2,6 +2,10 @@
 
 Kernel Design Agents is a repeatable loop for agent-driven implementation work. The loop is useful when a task needs both exploration and evidence-based promotion decisions.
 
+Agents applying KDA from another repository should start at
+[`agent-entry.md`](agent-entry.md), which explains workspace ownership, skill
+invocation, and when a full optimization loop is appropriate.
+
 ## Principle
 
 Keep the reusable workflow separate from the task workspace. This repository explains the flow. The task workspace owns code, tests, datasets, benchmark scripts, private rules, and generated artifacts.
